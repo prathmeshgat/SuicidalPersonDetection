@@ -1,0 +1,8 @@
+#OS junk files
+*.DS_Store
+
+#Resources
+resources
+
+#TEXT FILES REPOSITORY
+TextFiles
