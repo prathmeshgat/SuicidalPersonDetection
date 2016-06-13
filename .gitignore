@@ -6,3 +6,9 @@ resources
 
 #TEXT FILES REPOSITORY
 TextFiles
+
+#TOKENFILES
+TokenizedTextFiles
+
+#idea
+*.idea

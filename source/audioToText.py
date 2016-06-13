@@ -6,51 +6,74 @@ from nltk.stem.porter import PorterStemmer
 from os import path
 
 
+def Tokenize(TextData):
+    tokenizer = RegexpTokenizer(r'\w+')
+    tokens = list()
 
-# obtain path to "english.wav" in the same folder as this script
-AUDIO_FILE = path.join(os.pardir, "resources/Suicidal/AmandaTodd.wav")
+    # create English stop words list
+    en_stop = get_stop_words('en')
 
-# use the audio file as the audio source
-r = sr.Recognizer()
-with sr.AudioFile(AUDIO_FILE) as source:
-    audio = r.record(source) # read the entire audio file
+    # Create p_stemmer of class PorterStemmer
+    p_stemmer = PorterStemmer()
 
-# recognize speech using IBM Speech to Text
-IBM_USERNAME = "8e6242fe-09d3-4b27-9c54-d75fdbbe5866" # IBM Speech to Text usernames are strings of the form XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-IBM_PASSWORD = "I5dtpHrttHst" # IBM Speech to Text passwords are mixed-case alphanumeric strings
-try:
-    TextData = r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD)
-    print(TextData)
-except sr.UnknownValueError:
-    print("IBM Speech to Text could not understand audio")
-except sr.RequestError as e:
-    print("Could not request results from IBM Speech to Text service; {0}".format(e))
+    # clean and tokenize document string
+    raw = TextData.lower()
+    tokens = tokenizer.tokenize(raw)
 
-tokenizer = RegexpTokenizer(r'\w+')
-tokens = list()
+    # remove stop words from tokens
+    stopped_tokens = [i for i in tokens if not i in en_stop]
 
-# create English stop words list
-en_stop = get_stop_words('en')
+    # stem tokens
+    stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
+    tokens = stemmed_tokens
 
-# Create p_stemmer of class PorterStemmer
-p_stemmer = PorterStemmer()
+    TOKENIZEDTEXT_FILE = path.join(os.pardir, "TokenizedTextFiles/☯Reading My Suicide Letter☯.txt")
+    fp = open(TOKENIZEDTEXT_FILE, "w")
+    print(TOKENIZEDTEXT_FILE)
+    # pickle.dump(tokens, fp)
+    fp.write(str(tokens))
+    fp.close()
 
-# clean and tokenize document string
-raw = TextData.lower()
-tokens = tokenizer.tokenize(raw)
+def CovertAudioToText():
+    TextData=""
+    # obtain path to "english.wav" in the same folder as this script
+    AUDIO_FILE = path.join(os.pardir, "resources/Suicidal/Will It Hurt  (TRIGGER WARNING GRAPHIC contains scenes of suicide and self harm).wav")
 
-# remove stop words from tokens
-stopped_tokens = [i for i in tokens if not i in en_stop]
+    # use the audio file as the audio source
+    r = sr.Recognizer()
+    with sr.AudioFile(AUDIO_FILE) as source:
+        audio = r.record(source) # read the entire audio file
 
-# stem tokens
-stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
-tokens = stemmed_tokens
+    # recognize speech using IBM Speech to Text
+    IBM_USERNAME = "3b3b1302-75af-429c-99e3-fb6ae5d18b40" # IBM Speech to Text usernames are strings of the form XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+    IBM_PASSWORD = "tx4ZdTbfswCo" # IBM Speech to Text passwords are mixed-case alphanumeric strings
 
-TEXT_FILE = path.join(os.pardir, "TextFiles/AmandaTodd.txt")
-fp = open(TEXT_FILE,"w")
-#pickle.dump(tokens, fp)
-fp.write(str(tokens))
-fp.close()
+    try:
+        TextData = r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD)
+        print(TextData)
+        TEXT_FILE = path.join(os.pardir, "TextFiles/Will It Hurt  (TRIGGER WARNING GRAPHIC contains scenes of suicide and self harm).txt")
+        fp = open(TEXT_FILE, "w")
+        print(TEXT_FILE)
+        # pickle.dump(tokens, fp)
+        fp.write(TextData)
+        fp.close()
+    except sr.UnknownValueError:
+        print("IBM Speech to Text could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from IBM Speech to Text service; {0}".format(e))
+
+    return TextData;
+
+TextData = CovertAudioToText()
+
+# TOKENIZEDTEXT_FILE = path.join(os.pardir, "TextFiles/☯Reading My Suicide Letter☯.txt")
+# fp =open(TOKENIZEDTEXT_FILE,'r')
+# TextData = fp.read()
+
+Tokenize(TextData)
+
+
+
 
 
 
