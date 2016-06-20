@@ -27,7 +27,7 @@ def Tokenize(TextData):
     stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
     tokens = stemmed_tokens
 
-    TOKENIZEDTEXT_FILE = path.join(os.pardir, "TokenizedTextFiles/☯Reading My Suicide Letter☯.txt")
+    TOKENIZEDTEXT_FILE = path.join(os.pardir, "TokenizedTextFiles/Personal-Narration/Plus-size More Like My Size  Ashley Graham  TEDxBerkleeValencia.txt")
     fp = open(TOKENIZEDTEXT_FILE, "w")
     print(TOKENIZEDTEXT_FILE)
     # pickle.dump(tokens, fp)
@@ -37,7 +37,7 @@ def Tokenize(TextData):
 def CovertAudioToText():
     TextData=""
     # obtain path to "english.wav" in the same folder as this script
-    AUDIO_FILE = path.join(os.pardir, "resources/Suicidal/Will It Hurt  (TRIGGER WARNING GRAPHIC contains scenes of suicide and self harm).wav")
+    AUDIO_FILE = path.join(os.pardir, "resources/Personal-Narration/Plus-size More Like My Size  Ashley Graham  TEDxBerkleeValencia.wav")
 
     # use the audio file as the audio source
     r = sr.Recognizer()
@@ -51,7 +51,7 @@ def CovertAudioToText():
     try:
         TextData = r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD)
         print(TextData)
-        TEXT_FILE = path.join(os.pardir, "TextFiles/Will It Hurt  (TRIGGER WARNING GRAPHIC contains scenes of suicide and self harm).txt")
+        TEXT_FILE = path.join(os.pardir, "TextFiles/Personal-Narration/Plus-size More Like My Size  Ashley Graham  TEDxBerkleeValencia.txt")
         fp = open(TEXT_FILE, "w")
         print(TEXT_FILE)
         # pickle.dump(tokens, fp)
