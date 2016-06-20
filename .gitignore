@@ -10,5 +10,8 @@ TextFiles
 #TOKENFILES
 TokenizedTextFiles
 
+#Documents
+Docs
+
 #idea
 *.idea
