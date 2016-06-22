@@ -5,7 +5,7 @@ from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
 from os import path
 
-
+#tokenize text file by using stemming
 def Tokenize(TextData):
     tokenizer = RegexpTokenizer(r'\w+')
     tokens = list()
@@ -34,6 +34,7 @@ def Tokenize(TextData):
     fp.write(str(tokens))
     fp.close()
 
+#call sppech to tex API and save text in text file
 def CovertAudioToText():
     TextData=""
     # obtain path to "english.wav" in the same folder as this script
@@ -65,10 +66,6 @@ def CovertAudioToText():
     return TextData;
 
 TextData = CovertAudioToText()
-
-# TOKENIZEDTEXT_FILE = path.join(os.pardir, "TextFiles/☯Reading My Suicide Letter☯.txt")
-# fp =open(TOKENIZEDTEXT_FILE,'r')
-# TextData = fp.read()
 
 Tokenize(TextData)
 
