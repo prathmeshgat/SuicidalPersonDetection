@@ -1,8 +1,11 @@
+__author__ = 'Prathmesh'
+
 import os
 import nltk
 import csv
 from nltk import pos_tag, word_tokenize
 from os import path
+
 
 def suicudalRecords():
     for fileCount in range(1, 27):

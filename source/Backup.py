@@ -1,3 +1,5 @@
+__author__ = 'Prathmesh'
+
 import os
 import speech_recognition as sr
 from nltk.tokenize import RegexpTokenizer
