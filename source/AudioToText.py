@@ -37,9 +37,9 @@ def Tokenize(TextData):
 def CovertAudioToText():
     TextData=""
     # obtain path to "english.wav" in the same folder as this script
-    AUDIO_FILE = path.join(os.pardir, "resources/Personal-Narration/Plus-size More Like My Size  Ashley Graham  TEDxBerkleeValencia.wav")
+    AUDIO_FILE = path.join(os.pardir, "Resources/Personal-Narration/Plus-size More Like My Size  Ashley Graham  TEDxBerkleeValencia.wav")
 
-    # use the audio file as the audio source
+    # use the audio file as the audio Source
     r = sr.Recognizer()
     with sr.AudioFile(AUDIO_FILE) as source:
         audio = r.record(source) # read the entire audio file

@@ -7,7 +7,7 @@ from os import path
 
 # obtain path to "english.wav" in the same folder as this script
 
-AUDIO_FILE = path.join(os.pardir, "resources\\AmandaTodd.wav")
+AUDIO_FILE = path.join(os.pardir, "Resources\\AmandaTodd.wav")
 #AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), "french.aiff")
 #AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), "chinese.flac")
 
