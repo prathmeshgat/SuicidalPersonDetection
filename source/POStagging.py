@@ -38,14 +38,7 @@ def suicudalRecords():
             if(item == 'PRP$'):
                 posessivePronounCount = tagged_tokens_dict[item]
 
-        FILECOUNT = str(fileCount)
-        NOUN = str(nounCount/count)
-        VERB = str(verbCount/count)
-        ADVERB = str(adverbCount/count)
-        P1 = str(personalPronounCount/count)
-        P2 = str(posessivePronounCount/count)
-        print(NOUN)
-        writer.writerow({'FileNumber': FILECOUNT, 'NOUN': NOUN,'VERB': VERB,'ADV':ADVERB ,'P1':P1,'P2':P2 ,'Class': 'S'})
+        writer.writerow({'FileNumber': fileCount, 'NOUN': (nounCount/count),'VERB': (verbCount/count),'ADV':(adverbCount/count) ,'P1':(personalPronounCount/count),'P2':(posessivePronounCount/count) ,'Class': 'S','ClassBool': 1})
 
 def personalNarrationRecords():
     for fileCount in range(1, 18):
@@ -81,14 +74,7 @@ def personalNarrationRecords():
             if(item == 'PRP$'):
                 posessivePronounCount = tagged_tokens_dict[item]
 
-        FILECOUNT = str(fileCount)
-        NOUN = str(nounCount/count)
-        VERB = str(verbCount/count)
-        ADVERB = str(adverbCount/count)
-        P1 = str(personalPronounCount/count)
-        P2 = str(posessivePronounCount/count)
-        print(NOUN)
-        writer.writerow({'FileNumber': FILECOUNT, 'NOUN': NOUN,'VERB': VERB,'ADV':ADVERB ,'P1':P1,'P2':P2 ,'Class': 'P'})
+        writer.writerow({'FileNumber': fileCount, 'NOUN': (nounCount/count),'VERB': (verbCount/count),'ADV':(adverbCount/count) ,'P1':(personalPronounCount/count),'P2':(posessivePronounCount/count) ,'Class': 'P','ClassBool': 0})
 
 def fromTextFile(TEXT_FILE):
     fp = open(TEXT_FILE, "r")
@@ -103,7 +89,7 @@ def fromTextFile(TEXT_FILE):
 
 CSV_FILE = path.join(os.pardir, "Resources/Machine-Learning-Files/Features.csv")
 csvfile = open(CSV_FILE, 'w')
-fieldnames = ['FileNumber','NOUN', 'VERB','ADV','P1','P2','Class']
+fieldnames = ['FileNumber','NOUN', 'VERB','ADV','P1','P2','Class','ClassBool']
 writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=fieldnames)
 writer.writeheader()
 

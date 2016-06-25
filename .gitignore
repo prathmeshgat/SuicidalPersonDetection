@@ -13,5 +13,8 @@ TokenizedTextFiles
 #Documents
 Docs
 
+#RESULT FILES
+Results
+
 #idea
 *.idea
