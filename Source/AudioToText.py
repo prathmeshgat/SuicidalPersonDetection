@@ -71,7 +71,7 @@ TextData = CovertAudioToText()
 # fp =open(TOKENIZEDTEXT_FILE,'r')
 # TextData = fp.read()
 
-Tokenize(TextData)
+#Tokenize(TextData)
 
 
 
