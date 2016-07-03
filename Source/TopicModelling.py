@@ -162,7 +162,7 @@ def topicModellingSuicidal():
     suicidalDocSet = getSuicidalDocSet()
 
     #pre-process Suicidal Doc set
-    suicidalTokens = testPreProcessDocSet(suicidalDocSet)
+    suicidalTokens = preprocessDocSet(suicidalDocSet)
 
     #apply lda on suicidal doc set
     print("Topics in Suicidal Corpus::")
@@ -175,7 +175,7 @@ def topicModellingPersonalNarration():
     personalNarrationDocSet = getPersonalNarrationDocSet()
 
     #pre-process Personal narration Doc set
-    personalNarrationTokens = testPreProcessDocSet(personalNarrationDocSet)
+    personalNarrationTokens = preprocessDocSet(personalNarrationDocSet)
 
     #apply lda on Personal Narration doc set
     print("Topics in Personal Narration Corpus::")
@@ -188,7 +188,7 @@ def frequentWordsSuicidalVideos():
     suicidalDocSet = getSuicidalDocSet()
 
     #pre-process Suicidal Doc set
-    suicidalTokens = testPreProcessDocSet(suicidalDocSet)
+    suicidalTokens = preprocessDocSet(suicidalDocSet)
 
     # turn our tokenized documents into a id <-> term dictionary
     dictionary = corpora.Dictionary(suicidalTokens)
@@ -198,7 +198,7 @@ def frequentWordsSuicidalVideos():
     wordCount=0
     topTenWords = list()
     for item in sorted_dict:
-        if(wordCount<=50):
+        if(wordCount<=10):
              for item1 in dictionary.token2id.items():
                  if item[0] == item1[1]:
                      topTenWords.append([item1[0],item[1]])
@@ -214,7 +214,7 @@ def frequentWordsPersonalNarrationVideos():
     personlaNarrationDocSet = getPersonalNarrationDocSet()
 
     #pre-process Suicidal Doc set
-    personlaNarrationTokens = testPreProcessDocSet(personlaNarrationDocSet)
+    personlaNarrationTokens = preprocessDocSet(personlaNarrationDocSet)
 
     # turn our tokenized documents into a id <-> term dictionary
     dictionary = corpora.Dictionary(personlaNarrationTokens)
@@ -224,7 +224,7 @@ def frequentWordsPersonalNarrationVideos():
     wordCount=0
     topTenWords = list()
     for item in sorted_dict:
-        if(wordCount<=50):
+        if(wordCount<=10):
              for item1 in dictionary.token2id.items():
                  if item[0] == item1[1]:
                      topTenWords.append([item1[0],item[1]])
