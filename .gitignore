@@ -20,6 +20,6 @@ Results
 *.idea
 
 #yotube creddentials
-YotubeApi/youtube-v3-discoverydocument.json
-YotubeApi/client_secrets.json
-YotubeApi/youtube-v3-discoverydocument.json
+Source/YotubeApi/youtube-v3-discoverydocument.json
+Source/YotubeApi/client_secrets.json
+Source/YotubeApi/youtube-v3-discoverydocument.json
