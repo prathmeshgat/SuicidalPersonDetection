@@ -19,7 +19,7 @@ def suicudalRecords():
             else:
                  tagged_tokens_dict[item[1]] = 1
 
-        #print(tagged_tokens_dict)
+        print(tagged_tokens_dict)
 
         count =0;
         nounCount =0
@@ -96,7 +96,7 @@ fieldnames = ['FileNumber','NOUN', 'VERB','ADV','P1','P2','Class','ClassBool']
 writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=fieldnames)
 writer.writeheader()
 
-personalNarrationRecords()
+#personalNarrationRecords()
 
 suicudalRecords()
 
