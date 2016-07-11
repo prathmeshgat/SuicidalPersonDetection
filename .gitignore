@@ -18,3 +18,8 @@ Results
 
 #idea
 *.idea
+
+#yotube creddentials
+YotubeApi/youtube-v3-discoverydocument.json
+YotubeApi/client_secrets.json
+YotubeApi/youtube-v3-discoverydocument.json
