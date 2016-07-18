@@ -25,7 +25,7 @@ from oauth2client.tools import argparser, run_flow
 #   https://developers.google.com/youtube/v3/guides/authentication
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
-CLIENT_SECRETS_FILE = "YotubeApi/client_secrets.json"
+CLIENT_SECRETS_FILE = "client_secrets.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
@@ -62,27 +62,50 @@ def get_authenticated_service(args):
 
   # Trusted testers can download this discovery document from the developers page
   # and it should be in the same directory with the code.
-  with open("YotubeApi/youtube-v3-discoverydocument.json", "r",encoding="utf8") as f:
+  with open("youtube-v3-discoverydocument.json", "r",encoding="utf8") as f:
     doc = f.read()
     return build_from_document(doc, http=credentials.authorize(httplib2.Http()))
 
 
 # Call the API's commentThreads.list method to list the existing comments.
 def get_comments(youtube, video_id, channel_id):
-  results = youtube.commentThreads().list(
-    part="snippet",
-    videoId=video_id,
-    channelId=channel_id,
-    textFormat="plainText"
-  ).execute()
 
-  for item in results["items"]:
-    comment = item["snippet"]["topLevelComment"]
-    author = comment["snippet"]["authorDisplayName"]
-    text = comment["snippet"]["textDisplay"]
-    print("Comment by %s: %s" % (author, text))
+    commentList = dict()
+    tokenFlag = 1
+    token = None
+    while(tokenFlag==1):
 
-  return results["items"]
+      results = youtube.commentThreads().list(
+        part="snippet",
+        videoId=video_id,
+        channelId=channel_id,
+        textFormat="plainText",
+        maxResults = "100",
+        pageToken = token
+      ).execute()
+
+
+      for item in results["items"]:
+        comment = item["snippet"]["topLevelComment"]
+        author = comment["snippet"]["authorDisplayName"]
+        text = comment["snippet"]["textDisplay"]
+        if(author not in commentList.keys()):
+            commentList[author] = list()
+            commentList[author].append(text)
+        else:
+            commentList[author].append(text)
+
+        #print("Comment by %s: %s" % (author, text))
+
+      if("nextPageToken" in results):
+        token = results["nextPageToken"]
+      else:
+          token = None
+          tokenFlag =0
+
+
+
+    return commentList;
 
 
 # Call the API's commentThreads.insert method to insert a comment.

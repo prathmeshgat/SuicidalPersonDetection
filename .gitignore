@@ -2,19 +2,12 @@
 *.DS_Store
 
 #Resources
-resources
-
-#TEXT FILES REPOSITORY
-TextFiles
-
-#TOKENFILES
-TokenizedTextFiles
+Resources/Personal-Narration
+Resources/Suicidal
+Resources/TokenizedTextFiles
 
 #Documents
 Docs
-
-#RESULT FILES
-Results
 
 #idea
 *.idea
