@@ -6,7 +6,8 @@
 import httplib2
 import os
 import sys
-
+import json
+from os import path
 from googleapiclient.discovery import build_from_document
 from googleapiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
@@ -168,16 +169,26 @@ if __name__ == "__main__":
   youtube = get_authenticated_service(args)
   try:
     # All the available methods are used in sequence just for the sake of an example.
+
     # Insert channel comment by omitting videoId
     #insert_comment(youtube, args.channelid, None, args.text)
+
     # Insert video comment
     #insert_comment(youtube, args.channelid, args.videoid, args.text)
     video_comments = get_comments(youtube, args.videoid, None)
+    jsonObject = {"channelId":args.channelid,"videoId": args.videoid, "comments": video_comments}
+    TEXT_FILE = path.join(os.path.dirname('C:/git/SuicidalPersonDetection/'), "Resources/CommentsFiles/Suicidal/17.txt")
+    fp = open(TEXT_FILE, "w")
+    fp.write(json.dumps(jsonObject))
+    fp.close()
+
     # if video_comments:
     #   update_comment(youtube, video_comments[0])
+
     #channel_comments = get_comments(youtube, None, args.channelid)
     # if channel_comments:
     #   update_comment(youtube, channel_comments[0])
+
   except HttpError as e:
     print("An HTTP error %d occurred:\n%s"(e.resp.status, e.content))
   else:
