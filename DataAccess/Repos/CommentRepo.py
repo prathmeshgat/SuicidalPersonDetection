@@ -18,7 +18,7 @@ class CommentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.Comment(obj['_id'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['nnFraction'],obj['vbFration'],
+        return Model.Comment(obj['_id'],obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],

@@ -96,7 +96,7 @@ def CreateDB():
             print(container.DocumentRepo.insert(Doc))
             id = id +1
 
-CreateDB()
+# CreateDB()
 
 # container = Utils.Container()
 # res = container.DocumentRepo.getSuicidalDocSet()
@@ -130,6 +130,7 @@ def CreateCommentsDB():
                     sentiments = SA.SentimentAnalyzer.calculateSentiment(item)
 
                     tcomment = DA1.Comment(count,
+                                      fileCount,
                                       item,
                                       "S",
                                       comments["channelId"],
@@ -149,10 +150,9 @@ def CreateCommentsDB():
                     count = count + 1
                     # print(count)
 
-CreateCommentsDB()
+# CreateCommentsDB()
 
 container = Utils.Container()
-res = container.DocumentRepo.getAvrageSentiment()
-# print(res.text)
-for item in res:
-    print(item)
+res = container.CommentRepo.get(30000)
+print(res.__dict__)
+

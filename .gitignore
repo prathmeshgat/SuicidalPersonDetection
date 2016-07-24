@@ -21,3 +21,7 @@ Source/YotubeApi/YotubeApiCaller.py-oauth2.json
 
 
 
+DataAccess/Models/__pycache__/
+DataAccess/Repos/__pycache__/
+DataAccess/Utils/__pycache__/
+Source/__pycache__/

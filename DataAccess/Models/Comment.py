@@ -2,11 +2,13 @@ __author__ = 'Prathmesh'
 
 class Comment:
 
-    def __init__(self, _id,text,category,channelId,videoId,nnFraction=0,vbFration=0,advFraction=0,prp1Fraction=0,prp2Fraction=0,
+    def __init__(self, _id,documentId,text,category,channelId,videoId,nnFraction=0,vbFration=0,advFraction=0,prp1Fraction=0,prp2Fraction=0,
                  cleanedToken=list(),posSentiment=0,negSentiment=0,neuSentiment=0,compoundSentiment=0,
                  custom1=None,custom2 =None,custom3 = None,custom4 =None,custom5 = None):
 
         self._id = _id
+
+        self.documentId = documentId
 
         self.text = text
 
