@@ -1,7 +1,7 @@
 __author__ = 'Prathmesh'
 
 import json
-import DataAccess.Models.SuicidalDocument as Model
+import DataAccess.Models.PersonalNarrationDocument as Model
 from pymongo import MongoClient
 
 class PersonalNarrationDocumentRepo:
@@ -20,7 +20,7 @@ class PersonalNarrationDocumentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.Document(obj['documentId'],obj['transcript'],obj['category'],obj['_id'],obj['nnFraction'],obj['vbFration'],
+        return Model.PersonalNarrationDocument(obj['documentId'],obj['transcript'],obj['category'],obj['_id'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
