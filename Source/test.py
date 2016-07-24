@@ -13,34 +13,32 @@ import json
 from bson.objectid import ObjectId
 
 import Source.TopicModelling as TM
-# Doc = DA.Document(1,"titu","S")
-#
-# container = Utils.Container()
-#
-# print(container.DocumentRepo.insert(Doc))
-#
-# res = container.DocumentRepo.getAll()
-# for item in res:
-#     print(item.__dict__)
-#
-# Doc.transcript="updated"
-# print(container.DocumentRepo.update(Doc))
-#
-#
-# res = container.DocumentRepo.getAll()
-# for document in res:
-#     print(document.__dict__)
-#
-# res = container.DocumentRepo.delete(1)
-#
-# print(res)
-# res = container.DocumentRepo.getAll()
-# for item in res:
-#     print(item.__dict__)
+
+def topicModellingSuicidalComments():
+    container = Utils.Container()
+    res = container.SuicidalCommentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.text)
+
+    topicsModel = TM.TopicModelling(docSet,20,3,10)
+    print(topicsModel.getTopics())
+
+def topicModellingPNComments():
+    container = Utils.Container()
+    res = container.PersonalNarrationCommentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.text)
+
+    topicsModel = TM.TopicModelling(docSet,20,3,10)
+    print(topicsModel.getTopics())
 
 def CreateDB():
     container = Utils.Container()
-    container.PersonalNarrationDocumentRepo.cleanCollection()
+    container.SuicidalDocumentRepo.cleanCollection()
 
     for fileCount in range(1, 18):
         if fileCount!= 14:
@@ -71,6 +69,7 @@ def CreateDB():
 
             print(container.SuicidalDocumentRepo.insert(Doc))
 
+    container.PersonalNarrationDocumentRepo.cleanCollection()
     for fileCount in range(1, 18):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
@@ -99,18 +98,6 @@ def CreateDB():
 
             print(container.PersonalNarrationDocumentRepo.insert(Doc))
 
-# CreateDB()
-
-# container = Utils.Container()
-# res = container.DocumentRepo.getSuicidalDocSet()
-# docSet = list()
-# for item in res:
-#     docSet.append(item.__dict__["transcript"])
-#
-# topicsModel = TM.TopicModelling(docSet,5,3,10)
-# print(topicsModel.getTopics())
-
-
 def CreateCommentsDB():
     container = Utils.Container()
     container.SuicidalCommentRepo.cleanCollection()
@@ -124,8 +111,8 @@ def CreateCommentsDB():
             comments = json.loads(data)
 
 
-            for comment in comments["comments"].values():
-                for item in comment:
+            for comment in comments["comments"].keys():
+                for item in comments["comments"][comment]:
 
                     tagger = pos.POSTagger(item)
                     res = tagger.getFractions()
@@ -136,6 +123,7 @@ def CreateCommentsDB():
                                       "S",
                                       comments["channelId"],
                                       comments["videoId"],
+                                      comment,
                                       -1,
                                       res["nnFraction"],
                                       res["vbFration"],
@@ -151,11 +139,131 @@ def CreateCommentsDB():
                     print(container.SuicidalCommentRepo.insert(tcomment))
                     # print(count)
 
+def crudSuicidalDocs():
+
+    container = Utils.Container()
+
+    #create
+    Doc = DA.SuicidalDocument(50,"titu","S")
+    print(container.SuicidalDocumentRepo.insert(Doc))
+
+    #retrive
+    res = container.SuicidalDocumentRepo.get(50)
+    print(res.__dict__)
+
+    #update
+    Doc.transcript="updated"
+    print(container.SuicidalDocumentRepo.update(Doc))
+    res = container.SuicidalDocumentRepo.get(50)
+    print(res.__dict__)
+
+    #delete
+    res = container.SuicidalDocumentRepo.delete(50)
+    print(res)
+
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+    for item in res:
+        print(item.__dict__)
+
+def crudSuicidalComments():
+
+    container = Utils.Container()
+
+    #create
+    Doc = DA1.SuicidalComment(50,"titu","S","CH123","V123","U123")
+    id = container.SuicidalCommentRepo.insert(Doc)
+    print(id)
+
+    # retrive
+    res = container.SuicidalCommentRepo.get(ObjectId(id))
+    print(res.__dict__)
+
+    #update
+    Doc.text="updated"
+    Doc._id = ObjectId(id)
+    print(container.SuicidalCommentRepo.update(Doc))
+    res = container.SuicidalCommentRepo.get(ObjectId(id))
+    print(res.__dict__)
+
+    #delete
+    res = container.SuicidalCommentRepo.delete(ObjectId(id))
+    print(res)
+
+    res = container.SuicidalCommentRepo.get(ObjectId(id))
+    print(res)
+
+def crudPNComments():
+
+    container = Utils.Container()
+
+    #create
+    Doc = DA3.PersonalNarrationComment(50,"titu","S","CH123","V123","U123")
+    id = container.PersonalNarrationCommentRepo.insert(Doc)
+    print(id)
+
+    # retrive
+    res = container.PersonalNarrationCommentRepo.get(ObjectId(id))
+    print(res.__dict__)
+
+    #update
+    Doc.text="updated"
+    Doc._id = ObjectId(id)
+    print(container.PersonalNarrationCommentRepo.update(Doc))
+    res = container.PersonalNarrationCommentRepo.get(ObjectId(id))
+    print(res.__dict__)
+
+    #delete
+    res = container.PersonalNarrationCommentRepo.delete(ObjectId(id))
+    print(res)
+
+    res = container.PersonalNarrationCommentRepo.get(ObjectId(id))
+    print(res)
+
+def crudPNDocs():
+
+    container = Utils.Container()
+
+    #create
+    Doc = DA2.PersonalNarrationDocument(50,"titu","PN")
+    print(container.PersonalNarrationDocumentRepo.insert(Doc))
+
+    #retrive
+    res = container.PersonalNarrationDocumentRepo.get(50)
+    print(res.__dict__)
+
+    #update
+    Doc.transcript="updated"
+    print(container.PersonalNarrationDocumentRepo.update(Doc))
+    res = container.PersonalNarrationDocumentRepo.get(50)
+    print(res.__dict__)
+
+    #delete
+    res = container.PersonalNarrationDocumentRepo.delete(50)
+    print(res)
+
+    container = Utils.Container()
+    res = container.PersonalNarrationDocumentRepo.getAll()
+    for item in res:
+        print(item.__dict__)
+
+# topicModellingSuicidalComments()
+
+# crudSuicidalDocs()
+
+# crudPNDocs()
+
+# crudSuicidalComments()
+
+# crudPNComments()
+
+# CreateDB()
+
 # CreateCommentsDB()
-
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 container = Utils.Container()
-res = container.PersonalNarrationDocumentRepo.getAll()
-# print(res)
+res = container.SuicidalCommentRepo.getAll()
 for item in res:
-    print(item.__dict__)
-
+    print("\n")
+    pp.pprint(item.__dict__)

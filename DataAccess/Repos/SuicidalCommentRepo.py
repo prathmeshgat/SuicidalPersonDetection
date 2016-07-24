@@ -20,7 +20,7 @@ class SuicidalCommentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.SuicidalComment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['_id'],obj['nnFraction'],obj['vbFration'],
+        return Model.SuicidalComment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['ownerUserName'],obj['_id'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
@@ -28,8 +28,9 @@ class SuicidalCommentRepo:
 
     def get(self,Id):
         comment = self.collection.find_one({"_id": Id})
-
-        return self.object_decoder(comment)
+        if(comment is not None):
+            return self.object_decoder(comment)
+        return None;
 
     def getAvrageSentiment(self):
         cursor = self.collection.aggregate(
