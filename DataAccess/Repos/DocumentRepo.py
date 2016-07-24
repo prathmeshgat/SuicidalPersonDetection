@@ -14,18 +14,20 @@ class DocumentRepo:
         self.collection = self.db.DocumentSet
 
     def insert(self,document):
-        result = self.collection.insert(document.__dict__)
+        _dict = document.__dict__
+        del _dict["_id"]
+        result = self.collection.insert(_dict)
         return result
 
     def object_decoder(self,obj):
-        return Model.Document(obj['_id'],obj['transcript'],obj['category'],obj['nnFraction'],obj['vbFration'],
+        return Model.Document(obj['documentId'],obj['transcript'],obj['category'],obj['_id'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
                             obj['custom3'],obj['custom4'],obj['custom5'])
 
-    def get(self,Id):
-        document = self.collection.find_one({"_id": Id})
+    def get(self,Id,category):
+        document = self.collection.find_one({"documentId": Id,"category":category})
 
         return self.object_decoder(document)
 
@@ -66,8 +68,8 @@ class DocumentRepo:
 
         return sentimentList
 
-    def delete(self,Id):
-       result = self.collection.delete_many({"_id": Id})
+    def delete(self,Id,category):
+       result = self.collection.delete_many({"documentId": Id,"category":category})
        return result.deleted_count
 
     def cleanCollection(self):
@@ -82,8 +84,8 @@ class DocumentRepo:
 
     def update(self,document):
         id =document._id
-        temp =document.__dict__
-        _dict = {key: value for key, value in temp.items() if value is not "_id"}
+        _dict = document.__dict__
+        del _dict["_id"]
         result = self.collection.replace_one(
             {"_id": id},
             _dict

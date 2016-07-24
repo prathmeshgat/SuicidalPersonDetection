@@ -14,11 +14,13 @@ class CommentRepo:
         self.collection = self.db.CommentsSet
 
     def insert(self,comment):
-        result = self.collection.insert(comment.__dict__)
+        _dict = comment.__dict__
+        del _dict["_id"]
+        result = self.collection.insert(_dict)
         return result
 
     def object_decoder(self,obj):
-        return Model.Comment(obj['_id'],obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['nnFraction'],obj['vbFration'],
+        return Model.Comment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['_id'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
@@ -82,8 +84,8 @@ class CommentRepo:
 
     def update(self,comment):
         id =comment._id
-        temp =comment.__dict__
-        _dict = {key: value for key, value in temp.items() if value is not "_id"}
+        _dict = comment.__dict__
+        del _dict["_id"]
         result = self.collection.replace_one(
             {"_id": id},
             _dict

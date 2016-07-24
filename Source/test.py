@@ -8,6 +8,7 @@ from os import path
 import Source.POSTagging as pos
 import Source.SentimentAnalysis as SA
 import json
+from bson.objectid import ObjectId
 
 import Source.TopicModelling as TM
 # Doc = DA.Document(1,"titu","S")
@@ -54,6 +55,7 @@ def CreateDB():
             Doc = DA.Document(fileCount,
                               data,
                               "S",
+                              -1,
                               res["nnFraction"],
                               res["vbFration"],
                               res["advFraction"],
@@ -67,7 +69,6 @@ def CreateDB():
 
             print(container.DocumentRepo.insert(Doc))
 
-    id = 18
     for fileCount in range(1, 18):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
@@ -79,9 +80,10 @@ def CreateDB():
 
             sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
 
-            Doc = DA.Document(id,
+            Doc = DA.Document(fileCount,
                               data,
                               "PN",
+                              -1,
                               res["nnFraction"],
                               res["vbFration"],
                               res["advFraction"],
@@ -94,7 +96,6 @@ def CreateDB():
                               sentiments["compound"])
 
             print(container.DocumentRepo.insert(Doc))
-            id = id +1
 
 # CreateDB()
 
@@ -109,7 +110,6 @@ def CreateDB():
 
 
 def CreateCommentsDB():
-    count =1
     container = Utils.Container()
     container.CommentRepo.cleanCollection()
 
@@ -129,12 +129,12 @@ def CreateCommentsDB():
                     res = tagger.getFractions()
                     sentiments = SA.SentimentAnalyzer.calculateSentiment(item)
 
-                    tcomment = DA1.Comment(count,
-                                      fileCount,
+                    tcomment = DA1.Comment(fileCount,
                                       item,
                                       "S",
                                       comments["channelId"],
                                       comments["videoId"],
+                                      -1,
                                       res["nnFraction"],
                                       res["vbFration"],
                                       res["advFraction"],
@@ -147,12 +147,13 @@ def CreateCommentsDB():
                                       sentiments["compound"])
 
                     print(container.CommentRepo.insert(tcomment))
-                    count = count + 1
                     # print(count)
 
 # CreateCommentsDB()
 
 container = Utils.Container()
-res = container.CommentRepo.get(30000)
-print(res.__dict__)
+res = container.CommentRepo.getAll()
+print(res)
+# for item in res:
+#     print(item.__dict__)
 
