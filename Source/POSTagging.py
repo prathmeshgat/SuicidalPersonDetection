@@ -27,7 +27,7 @@ class POSTagger:
             else:
                  tagged_tokens_dict[item[1]] = 1
 
-        print(tagged_tokens_dict)
+        # print(tagged_tokens_dict)
 
         count =0;
         nounCount =0
@@ -52,11 +52,11 @@ class POSTagger:
 
         res ={
             'cleanedToken':word_tokenize(self.textData),
-            'nnFraction': (nounCount/count),
-            'vbFration': (verbCount/count),
-            'advFraction':(adverbCount/count) ,
-            'prp1Fraction':(personalPronounCount/count),
-            'prp2Fraction':(posessivePronounCount/count)
+            'nnFraction': (0 if count ==0 else nounCount/count),
+            'vbFration': (0 if count ==0 else verbCount/count),
+            'advFraction':(0 if count ==0 else adverbCount/count) ,
+            'prp1Fraction':(0 if count ==0 else personalPronounCount/count),
+            'prp2Fraction':(0 if count ==0 else posessivePronounCount/count)
             }
 
         return res
