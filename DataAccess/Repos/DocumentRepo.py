@@ -43,6 +43,29 @@ class DocumentRepo:
             docList.append(self.object_decoder(doc))
         return docList
 
+    def getAvrageSentiment(self):
+        cursor = self.collection.aggregate(
+            [
+                {
+                    "$group":
+                        {
+                            "_id":"$category",
+                            "compoundSentimentAvrage": {"$avg":"$compoundSentiment"},
+                            "posSentimentAvrage": {"$avg":"$posSentiment"},
+                            "negSentimentAvrage": {"$avg":"$negSentiment"},
+                            "neupoundSentimentAvrage": {"$avg":"$neuSentiment"}
+                        }
+                }
+            ]
+        )
+
+        sentimentList = list()
+
+        for item in cursor:
+            sentimentList.append(item)
+
+        return sentimentList
+
     def delete(self,Id):
        result = self.collection.delete_many({"_id": Id})
        return result.deleted_count

@@ -96,7 +96,7 @@ def CreateDB():
             print(container.DocumentRepo.insert(Doc))
             id = id +1
 
-# CreateDB()
+CreateDB()
 
 # container = Utils.Container()
 # res = container.DocumentRepo.getSuicidalDocSet()
@@ -149,10 +149,10 @@ def CreateCommentsDB():
                     count = count + 1
                     # print(count)
 
-# CreateCommentsDB()
+CreateCommentsDB()
 
 container = Utils.Container()
-res = container.CommentRepo.getAvrageSentiment()
+res = container.DocumentRepo.getAvrageSentiment()
 # print(res.text)
 for item in res:
     print(item)
