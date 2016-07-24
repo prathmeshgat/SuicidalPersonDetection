@@ -2,11 +2,12 @@
 *.DS_Store
 
 #Resources
-Resources/Personal-Narration
-Resources/Suicidal
+Resources/AudioFiles/Personal-Narration
+Resources/AudioFiles/Suicidal
 Resources/TokenizedTextFiles
 Resources/Database
 Resources/CommentsFiles
+Resources/AudioFiles
 #Documents
 Docs
 
