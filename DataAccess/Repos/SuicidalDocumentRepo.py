@@ -37,7 +37,7 @@ class SuicidalDocumentRepo:
                 {
                     "$group":
                         {
-                            "_id":None,
+                            "_id":"$category",
                             "compoundSentimentAvrage": {"$avg":"$compoundSentiment"},
                             "posSentimentAvrage": {"$avg":"$posSentiment"},
                             "negSentimentAvrage": {"$avg":"$negSentiment"},
