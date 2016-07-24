@@ -149,9 +149,10 @@ def CreateCommentsDB():
                     count = count + 1
                     # print(count)
 
-CreateCommentsDB()
+# CreateCommentsDB()
 
 container = Utils.Container()
-res = container.CommentRepo.getAll()
+res = container.CommentRepo.getAvrageSentiment()
+# print(res.text)
 for item in res:
-    print(item.__dict__)
+    print(item)

@@ -29,6 +29,29 @@ class CommentRepo:
 
         return self.object_decoder(comment)
 
+    def getAvrageSentiment(self):
+        cursor = self.collection.aggregate(
+            [
+                {
+                    "$group":
+                        {
+                            "_id":"$category",
+                            "compoundSentimentAvrage": {"$avg":"$compoundSentiment"},
+                            "posSentimentAvrage": {"$avg":"$posSentiment"},
+                            "negSentimentAvrage": {"$avg":"$negSentiment"},
+                            "neupoundSentimentAvrage": {"$avg":"$neuSentiment"}
+                        }
+                }
+            ]
+        )
+
+        sentimentList = list()
+
+        for item in cursor:
+            sentimentList.append(item)
+
+        return sentimentList
+
     def getSuicidalCommentSet(self):
         commentSet = self.collection.find({"category": "S"})
         commentList = list()
