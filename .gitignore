@@ -18,8 +18,5 @@ Source/YotubeApi/youtube-v3-discoverydocument.json
 Source/YotubeApi/client_secrets.json
 Source/YotubeApi/YotubeApiCaller.py-oauth2.json
 
-Resources/CommentsFiles/Personal-Narration/
-DataAccess/Models/__pycache__/
-DataAccess/Repos/__pycache__/
-DataAccess/Utils/__pycache__/
-Source/__pycache__/
+
+
