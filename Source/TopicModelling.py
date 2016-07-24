@@ -11,236 +11,147 @@ from gensim import corpora, models
 from os import path
 from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
 
-def fromTextFile(TEXT_FILE):
-    fp = open(TEXT_FILE, "r")
-    t_file = fp.read()
-    fp.close()
-    return t_file
+class TopicModelling:
 
-def getPersonalNarrationDocSet():
-    #prepare document Set
-    doc_set = list()
-    for fileCount in range(1, 18):
-            TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
-            doc = fromTextFile(TEXT_FILE)
-            doc_set.append(doc)
-    return doc_set;
+    def __init__(self,docSet,noTopics,noWords,noPasses):
+        self.docSet = docSet
+        self.noTopics = noTopics
+        self.noWords = noWords
+        self.noPasses = noPasses
 
-def getSuicidalDocSet():
-    #prepare document Set
-    doc_set = list()
-    for fileCount in range(1, 27):
-            TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Suicidal/"+str(fileCount)+".txt")
-            doc = fromTextFile(TEXT_FILE)
-            doc_set.append(doc)
-    return doc_set;
+    def preprocessDocSet(self):
+        tokenizer = RegexpTokenizer(r'\w+')
 
-def preprocessDocSet(doc_set):
-    tokenizer = RegexpTokenizer(r'\w+')
+        # create English stop words list
+        en_stop = get_stop_words('en')
+        en_stop.append('like')
+        en_stop.append('hesitation')
+        en_stop.append('know')
+        en_stop.append('just')
+        en_stop.append('well')
+        en_stop.append('go')
+        en_stop.append('thing')
+        en_stop.append('get')
+        en_stop.append('said')
+        en_stop.append('time')
+        en_stop.append('dnmt')
+        en_stop.append('will')
+        en_stop.append('think')
+        en_stop.append('will')
+        # Create p_stemmer of class PorterStemmer
+        p_stemmer = PorterStemmer()
 
-    # create English stop words list
-    en_stop = get_stop_words('en')
-    en_stop.append('like')
-    en_stop.append('hesitation')
-    en_stop.append('know')
-    en_stop.append('just')
-    en_stop.append('well')
-    en_stop.append('go')
-    en_stop.append('thing')
-    en_stop.append('get')
-    en_stop.append('said')
-    en_stop.append('time')
-    en_stop.append('dnmt')
-    en_stop.append('will')
-    en_stop.append('think')
-    en_stop.append('will')
-    # Create p_stemmer of class PorterStemmer
-    p_stemmer = PorterStemmer()
+        # list for tokenized documents in loop
+        texts = []
 
-    # list for tokenized documents in loop
-    texts = []
+        # loop through document list
+        for i in self.docSet:
 
-    # loop through document list
-    for i in doc_set:
+            # clean and tokenize document string
+            raw = i.lower()
+            tokens = tokenizer.tokenize(raw)
+            #tokens = word_tokenize(raw)
+            # remove stop words from tokens
+            stopped_tokens = [item for item in tokens if not item in en_stop]
 
-        # clean and tokenize document string
-        raw = i.lower()
-        tokens = tokenizer.tokenize(raw)
-        #tokens = word_tokenize(raw)
-        # remove stop words from tokens
-        stopped_tokens = [item for item in tokens if not item in en_stop]
+            # stem tokens
+            stemmed_tokens = [p_stemmer.stem(item) for item in stopped_tokens]
 
-        # stem tokens
-        stemmed_tokens = [p_stemmer.stem(item) for item in stopped_tokens]
+            # remove stop words from stemmed tokens
+            stopped_tokens = [item for item in stemmed_tokens if not item in en_stop]
 
-        # remove stop words from stemmed tokens
-        stopped_tokens = [item for item in stemmed_tokens if not item in en_stop]
+            #remove tokens containing ''' & '%'
+            cleaned_tokens = [item for item in stopped_tokens if ((item.find('\'') == -1) and item.find('%') == -1) and len(item)>2]
 
-        #remove tokens containing ''' & '%'
-        cleaned_tokens = [item for item in stopped_tokens if ((item.find('\'') == -1) and item.find('%') == -1) and len(item)>2]
+            # add tokens to list
+            texts.append(cleaned_tokens)
 
-        # add tokens to list
-        texts.append(cleaned_tokens)
+        return texts
 
-    return texts
+    def lda_apply(self,texts,no_topics,no_words,no_passes):
+        # turn our tokenized documents into a id <-> term dictionary
+        dictionary = corpora.Dictionary(texts)
 
-def testPreProcessDocSet(doc_set):
+        # convert tokenized documents into a document-term matrix
+        corpus = [dictionary.doc2bow(text) for text in texts]
 
-    tokenizer = RegexpTokenizer(r'\w+')
+        # generate LDA model
+        ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=no_topics, id2word = dictionary, passes=no_passes)
 
-    # create English stop words list
-    en_stop = get_stop_words('en')
-    en_stop.append('like')
-    en_stop.append('hesitation')
-    en_stop.append('know')
-    en_stop.append('just')
-    en_stop.append('well')
-    en_stop.append('go')
-    en_stop.append('thing')
-    en_stop.append('get')
-    en_stop.append('said')
-    en_stop.append('time')
-    en_stop.append('dnmt')
-    en_stop.append('will')
-    en_stop.append('think')
-    en_stop.append('will')
-    # Create p_stemmer of class PorterStemmer
-    p_stemmer = PorterStemmer()
+        return ldamodel.print_topics(num_topics=no_topics, num_words=no_words)
 
-    # list for tokenized documents in loop
-    texts = []
+    def getTopics(self):
 
-    # loop through document list
-    for doc in doc_set:
-        raw = doc.lower()
-        text = word_tokenize(raw)
-        tagList = nltk.pos_tag(text)
-        tagged_tokens_dict = dict()
+        #pre-process Suicidal Doc set
+        Tokens = self.preprocessDocSet()
 
-        #text tokens
-        text =[]
+        #apply lda on suicidal doc set
+        # print("Topics in Suicidal Corpus::")
+        res = self.lda_apply(Tokens,self.noTopics,self.noWords,self.noPasses)
 
-        #posTokens take only noun,verb,PROpositin
-        posTokens = list()
-        for item in tagList:
-            # if(item[1] in ["NN","VB","RB","PRP","PRP$"]):
-            if(item[1] in ["NN","PRP"]):
-                posTokens.append(item[0])
+        return res
 
-        # remove stop words from tokens
-        stopped_tokens = [item for item in posTokens if not item in en_stop]
 
-        # stem tokens
-        stemmed_tokens = [p_stemmer.stem(item) for item in stopped_tokens]
 
-        # remove stop words from stemmed tokens
-        stopped_tokens = [item for item in stemmed_tokens if not item in en_stop]
 
-        #remove tokens containing ''' & '%'
-        cleaned_tokens = [item for item in stopped_tokens if ((item.find('\'') == -1) and item.find('%') == -1) and len(item)>2]
-        #cleaned_tokens = [item for item in stopped_tokens if ((item.find('\'') == -1) and item.find('%') == -1)]
+# def frequentWordsSuicidalVideos():
+#     #Get Suicidal Doc set
+#     suicidalDocSet = getSuicidalDocSet()
+#
+#     #pre-process Suicidal Doc set
+#     suicidalTokens = preprocessDocSet(suicidalDocSet)
+#
+#     # turn our tokenized documents into a id <-> term dictionary
+#     dictionary = corpora.Dictionary(suicidalTokens)
+#
+#     sorted_dict= sorted(dictionary.dfs.items(), key=lambda x:x[1],reverse=True)
+#
+#     wordCount=0
+#     topTenWords = list()
+#     for item in sorted_dict:
+#         if(wordCount<=10):
+#              for item1 in dictionary.token2id.items():
+#                  if item[0] == item1[1]:
+#                      topTenWords.append([item1[0],item[1]])
+#         else:
+#             break
+#         wordCount = wordCount + 1
+#
+#     print("Suicidal::\n"+str(topTenWords))
+#     return topTenWords
 
-        # add tokens to list
-        texts.append(cleaned_tokens)
-
-    return texts
-
-def lda_apply(texts,no_topics,no_words,no_passes):
-    # turn our tokenized documents into a id <-> term dictionary
-    dictionary = corpora.Dictionary(texts)
-
-    # convert tokenized documents into a document-term matrix
-    corpus = [dictionary.doc2bow(text) for text in texts]
-
-    # generate LDA model
-    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=no_topics, id2word = dictionary, passes=no_passes)
-
-    print(ldamodel.print_topics(num_topics=no_topics, num_words=no_words))
-
-def topicModellingSuicidal():
-    #Get Suicidal Doc set
-    suicidalDocSet = getSuicidalDocSet()
-
-    #pre-process Suicidal Doc set
-    suicidalTokens = preprocessDocSet(suicidalDocSet)
-
-    #apply lda on suicidal doc set
-    print("Topics in Suicidal Corpus::")
-    lda_apply(suicidalTokens,7,5,10)
-
-    return
-
-def topicModellingPersonalNarration():
-    #Get Personal NArration DocSet
-    personalNarrationDocSet = getPersonalNarrationDocSet()
-
-    #pre-process Personal narration Doc set
-    personalNarrationTokens = preprocessDocSet(personalNarrationDocSet)
-
-    #apply lda on Personal Narration doc set
-    print("Topics in Personal Narration Corpus::")
-    lda_apply(personalNarrationTokens,26,5,10)
-
-    return
-
-def frequentWordsSuicidalVideos():
-    #Get Suicidal Doc set
-    suicidalDocSet = getSuicidalDocSet()
-
-    #pre-process Suicidal Doc set
-    suicidalTokens = preprocessDocSet(suicidalDocSet)
-
-    # turn our tokenized documents into a id <-> term dictionary
-    dictionary = corpora.Dictionary(suicidalTokens)
-
-    sorted_dict= sorted(dictionary.dfs.items(), key=lambda x:x[1],reverse=True)
-
-    wordCount=0
-    topTenWords = list()
-    for item in sorted_dict:
-        if(wordCount<=10):
-             for item1 in dictionary.token2id.items():
-                 if item[0] == item1[1]:
-                     topTenWords.append([item1[0],item[1]])
-        else:
-            break
-        wordCount = wordCount + 1
-
-    print("Suicidal::\n"+str(topTenWords))
-    return topTenWords
-
-def frequentWordsPersonalNarrationVideos():
-    #Get Suicidal Doc set
-    personlaNarrationDocSet = getPersonalNarrationDocSet()
-
-    #pre-process Suicidal Doc set
-    personlaNarrationTokens = preprocessDocSet(personlaNarrationDocSet)
-
-    # turn our tokenized documents into a id <-> term dictionary
-    dictionary = corpora.Dictionary(personlaNarrationTokens)
-
-    sorted_dict= sorted(dictionary.dfs.items(), key=lambda x:x[1],reverse=True)
-
-    wordCount=0
-    topTenWords = list()
-    for item in sorted_dict:
-        if(wordCount<=10):
-             for item1 in dictionary.token2id.items():
-                 if item[0] == item1[1]:
-                     topTenWords.append([item1[0],item[1]])
-        else:
-            break
-        wordCount = wordCount + 1
-
-    print("PN::\n"+str(topTenWords))
-    return topTenWords
-
+# def frequentWordsPersonalNarrationVideos():
+#     #Get Suicidal Doc set
+#     personlaNarrationDocSet = getPersonalNarrationDocSet()
+#
+#     #pre-process Suicidal Doc set
+#     personlaNarrationTokens = preprocessDocSet(personlaNarrationDocSet)
+#
+#     # turn our tokenized documents into a id <-> term dictionary
+#     dictionary = corpora.Dictionary(personlaNarrationTokens)
+#
+#     sorted_dict= sorted(dictionary.dfs.items(), key=lambda x:x[1],reverse=True)
+#
+#     wordCount=0
+#     topTenWords = list()
+#     for item in sorted_dict:
+#         if(wordCount<=10):
+#              for item1 in dictionary.token2id.items():
+#                  if item[0] == item1[1]:
+#                      topTenWords.append([item1[0],item[1]])
+#         else:
+#             break
+#         wordCount = wordCount + 1
+#
+#     print("PN::\n"+str(topTenWords))
+#     return topTenWords
+#
 
 #topicModellingSuicidal()
 
 #topicModellingPersonalNarration()
 
-frequentWordsSuicidalVideos()
-
-frequentWordsPersonalNarrationVideos()
+# frequentWordsSuicidalVideos()
+#
+# frequentWordsPersonalNarrationVideos()
 
