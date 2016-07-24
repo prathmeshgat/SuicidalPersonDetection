@@ -1,17 +1,17 @@
 __author__ = 'Prathmesh'
 
 import json
-import DataAccess.Models.Comment as Model
+import DataAccess.Models.SuicidalComment as Model
 from pymongo import MongoClient
 
-class CommentRepo:
+class SuicidalCommentRepo:
     def __init__(self):
 
         self.client = MongoClient('localhost', 27017)
 
         self.db = self.client.coreData
 
-        self.collection = self.db.CommentsSet
+        self.collection = self.db.SuicidalCommentsSet
 
     def insert(self,comment):
         _dict = comment.__dict__
@@ -20,7 +20,7 @@ class CommentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.Comment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['_id'],obj['nnFraction'],obj['vbFration'],
+        return Model.SuicidalComment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['_id'],obj['nnFraction'],obj['vbFration'],
                             obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
                             obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
@@ -54,19 +54,6 @@ class CommentRepo:
 
         return sentimentList
 
-    def getSuicidalCommentSet(self):
-        commentSet = self.collection.find({"category": "S"})
-        commentList = list()
-        for comment in commentSet:
-            commentList.append(self.object_decoder(comment))
-        return commentList
-
-    def getPersonalNarrationCommentSet(self):
-        commentSet = self.collection.find({"category": "PN"})
-        commentList = list()
-        for comment in commentSet:
-            commentList.append(self.object_decoder(comment))
-        return commentList
 
     def delete(self,Id):
        result = self.collection.delete_many({"_id": Id})

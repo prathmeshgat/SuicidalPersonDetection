@@ -7,7 +7,7 @@ import httplib2
 import os
 import sys
 import json
-import DataAccess.Models.Comment as DA1
+import DataAccess.Models.SuicidalComment as DA1
 import DataAccess.Utils.Container as Utils
 import Source.POSTagging as pos
 import Source.SentimentAnalysis as SA

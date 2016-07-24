@@ -1,20 +1,16 @@
 __author__ = 'Prathmesh'
 
-class Comment:
+class SuicidalDocument:
 
-    def __init__(self,documentId,text,category,channelId,videoId,_id=-1,nnFraction=0,vbFration=0,advFraction=0,prp1Fraction=0,prp2Fraction=0,
+    def __init__(self,documentId,transcript,category,_id=-1,nnFraction=0,vbFration=0,advFraction=0,prp1Fraction=0,prp2Fraction=0,
                  cleanedToken=list(),posSentiment=0,negSentiment=0,neuSentiment=0,compoundSentiment=0,
                  custom1=None,custom2 =None,custom3 = None,custom4 =None,custom5 = None):
 
         self.documentId = documentId
 
-        self.text = text
+        self.transcript = transcript
 
         self.category = category
-
-        self.channelId = channelId
-
-        self.videoId = videoId
 
         self._id = _id
 

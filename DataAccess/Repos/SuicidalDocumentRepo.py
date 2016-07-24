@@ -1,17 +1,17 @@
 __author__ = 'Prathmesh'
 
 import json
-import DataAccess.Models.Document as Model
+import DataAccess.Models.SuicidalDocument as Model
 from pymongo import MongoClient
 
-class DocumentRepo:
+class SuicidalDocumentRepo:
     def __init__(self):
 
         self.client = MongoClient('localhost', 27017)
 
         self.db = self.client.coreData
 
-        self.collection = self.db.DocumentSet
+        self.collection = self.db.SuicidalDocumentSet
 
     def insert(self,document):
         _dict = document.__dict__
@@ -26,24 +26,10 @@ class DocumentRepo:
                             obj['compoundSentiment'],obj['custom1'],obj['custom2'],
                             obj['custom3'],obj['custom4'],obj['custom5'])
 
-    def get(self,Id,category):
-        document = self.collection.find_one({"documentId": Id,"category":category})
+    def get(self,Id):
+        document = self.collection.find_one({"documentId": Id})
 
         return self.object_decoder(document)
-
-    def getSuicidalDocSet(self):
-        documentSet = self.collection.find({"category": "S"})
-        docList = list()
-        for doc in documentSet:
-            docList.append(self.object_decoder(doc))
-        return docList
-
-    def getPersonalNarrationDocSet(self):
-        documentSet = self.collection.find({"category": "PN"})
-        docList = list()
-        for doc in documentSet:
-            docList.append(self.object_decoder(doc))
-        return docList
 
     def getAvrageSentiment(self):
         cursor = self.collection.aggregate(
@@ -51,7 +37,7 @@ class DocumentRepo:
                 {
                     "$group":
                         {
-                            "_id":"$category",
+                            "_id":None,
                             "compoundSentimentAvrage": {"$avg":"$compoundSentiment"},
                             "posSentimentAvrage": {"$avg":"$posSentiment"},
                             "negSentimentAvrage": {"$avg":"$negSentiment"},
@@ -68,8 +54,8 @@ class DocumentRepo:
 
         return sentimentList
 
-    def delete(self,Id,category):
-       result = self.collection.delete_many({"documentId": Id,"category":category})
+    def delete(self,Id):
+       result = self.collection.delete_many({"documentId": Id})
        return result.deleted_count
 
     def cleanCollection(self):

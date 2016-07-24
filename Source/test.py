@@ -1,7 +1,7 @@
 __author__ = 'Prathmesh'
 from pymongo import MongoClient
-import DataAccess.Models.Document as DA
-import DataAccess.Models.Comment as DA1
+import DataAccess.Models.SuicidalDocument as DA
+import DataAccess.Models.SuicidalComment as DA1
 import DataAccess.Utils.Container as Utils
 import os
 from os import path
@@ -38,7 +38,7 @@ import Source.TopicModelling as TM
 
 def CreateDB():
     container = Utils.Container()
-    container.DocumentRepo.cleanCollection()
+    container.SuicidalDocumentRepo.cleanCollection()
 
     for fileCount in range(1, 18):
         if fileCount!= 14:
@@ -52,7 +52,7 @@ def CreateDB():
 
             sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
 
-            Doc = DA.Document(fileCount,
+            Doc = DA.SuicidalDocument(fileCount,
                               data,
                               "S",
                               -1,
@@ -67,35 +67,35 @@ def CreateDB():
                               sentiments["neu"],
                               sentiments["compound"])
 
-            print(container.DocumentRepo.insert(Doc))
+            print(container.SuicidalDocumentRepo.insert(Doc))
 
-    for fileCount in range(1, 18):
-            TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
-            fp = open(TEXT_FILE, "r")
-            data = fp.read()
-            fp.close()
-
-            tagger = pos.POSTagger(data)
-            res = tagger.getFractions()
-
-            sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
-
-            Doc = DA.Document(fileCount,
-                              data,
-                              "PN",
-                              -1,
-                              res["nnFraction"],
-                              res["vbFration"],
-                              res["advFraction"],
-                              res["prp1Fraction"],
-                              res["prp2Fraction"],
-                              res["cleanedToken"],
-                              sentiments["pos"],
-                              sentiments["neg"],
-                              sentiments["neu"],
-                              sentiments["compound"])
-
-            print(container.DocumentRepo.insert(Doc))
+    # for fileCount in range(1, 18):
+    #         TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
+    #         fp = open(TEXT_FILE, "r")
+    #         data = fp.read()
+    #         fp.close()
+    #
+    #         tagger = pos.POSTagger(data)
+    #         res = tagger.getFractions()
+    #
+    #         sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
+    #
+    #         Doc = DA.Document(fileCount,
+    #                           data,
+    #                           "PN",
+    #                           -1,
+    #                           res["nnFraction"],
+    #                           res["vbFration"],
+    #                           res["advFraction"],
+    #                           res["prp1Fraction"],
+    #                           res["prp2Fraction"],
+    #                           res["cleanedToken"],
+    #                           sentiments["pos"],
+    #                           sentiments["neg"],
+    #                           sentiments["neu"],
+    #                           sentiments["compound"])
+    #
+    #         print(container.DocumentRepo.insert(Doc))
 
 # CreateDB()
 
@@ -111,7 +111,7 @@ def CreateDB():
 
 def CreateCommentsDB():
     container = Utils.Container()
-    container.CommentRepo.cleanCollection()
+    container.SuicidalCommentRepo.cleanCollection()
 
     for fileCount in range(1, 18):
         if fileCount!= 14:
@@ -129,7 +129,7 @@ def CreateCommentsDB():
                     res = tagger.getFractions()
                     sentiments = SA.SentimentAnalyzer.calculateSentiment(item)
 
-                    tcomment = DA1.Comment(fileCount,
+                    tcomment = DA1.SuicidalComment(fileCount,
                                       item,
                                       "S",
                                       comments["channelId"],
@@ -146,14 +146,14 @@ def CreateCommentsDB():
                                       sentiments["neu"],
                                       sentiments["compound"])
 
-                    print(container.CommentRepo.insert(tcomment))
+                    print(container.SuicidalCommentRepo.insert(tcomment))
                     # print(count)
 
 # CreateCommentsDB()
 
 container = Utils.Container()
-res = container.CommentRepo.getAll()
-print(res)
-# for item in res:
-#     print(item.__dict__)
+res = container.SuicidalCommentRepo.getAll()
+# print(res)
+for item in res:
+    print(item.__dict__)
 
