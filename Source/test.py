@@ -93,7 +93,7 @@ def CreateDB():
             print(container.DocumentRepo.insert(Doc))
             id = id +1
 
-
+# CreateDB()
 
 container = Utils.Container()
 res = container.DocumentRepo.getSuicidalDocSet()
