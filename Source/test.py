@@ -18,23 +18,61 @@ def topicModellingSuicidalComments():
     container = Utils.Container()
     res = container.SuicidalCommentRepo.getAll()
 
+    commentSet = list()
+    for item in res:
+        commentSet.append(item.text)
+
+    topicsModel = TM.TopicModelling(commentSet,50,3,10)
+    print("No of comments::"+ str(len(commentSet)))
+    topics =topicsModel.getTopics()
+    for item in topics:
+        print("\n")
+        print(item)
+
+def topicModellingSuicidalDocs():
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+
     docSet = list()
     for item in res:
-        docSet.append(item.text)
+        docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(docSet,20,3,10)
-    print(topicsModel.getTopics())
+    topicsModel = TM.TopicModelling(docSet,5,3,10)
+    print("No of documents::"+ str(len(docSet)))
+    topics =topicsModel.getTopics()
+    for item in topics:
+        print("\n")
+        print(item)
+
+def topicModellingPNDocs():
+    container = Utils.Container()
+    res = container.PersonalNarrationDocumentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.transcript)
+
+    topicsModel = TM.TopicModelling(docSet,5,3,10)
+    print("No of documents::"+ str(len(docSet)))
+    topics =topicsModel.getTopics()
+    for item in topics:
+        print("\n")
+        print(item)
 
 def topicModellingPNComments():
     container = Utils.Container()
     res = container.PersonalNarrationCommentRepo.getAll()
 
-    docSet = list()
+    commentSet = list()
     for item in res:
-        docSet.append(item.text)
+        commentSet.append(item.text)
 
-    topicsModel = TM.TopicModelling(docSet,20,3,10)
-    print(topicsModel.getTopics())
+    topicsModel = TM.TopicModelling(commentSet,20,3,10)
+    print("No of comments::"+ str(len(commentSet)))
+    topics =topicsModel.getTopics()
+    for item in topics:
+        print("\n")
+        print(item)
 
 def CreateDB():
     container = Utils.Container()
@@ -247,7 +285,13 @@ def crudPNDocs():
     for item in res:
         print(item.__dict__)
 
+# topicModellingSuicidalDocs()
+
 # topicModellingSuicidalComments()
+
+# topicModellingPNDocs()
+
+# topicModellingPNComments()
 
 # crudSuicidalDocs()
 
@@ -260,10 +304,17 @@ def crudPNDocs():
 # CreateDB()
 
 # CreateCommentsDB()
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-container = Utils.Container()
-res = container.SuicidalCommentRepo.getAll()
-for item in res:
-    print("\n")
-    pp.pprint(item.__dict__)
+
+# import pprint
+# pp = pprint.PrettyPrinter(indent=4)
+# container = Utils.Container()
+# container.PersonalNarrationCommentRepo.cleanCollection()
+# res = container.PersonalNarrationCommentRepo.getAll()
+# count =0
+# for item in res:
+#     print("\n")
+#     pp.pprint(item.__dict__)
+#     count = count +1
+# print("Count::"+str(count))
+
+

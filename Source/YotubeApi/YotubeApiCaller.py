@@ -6,12 +6,11 @@
 import httplib2
 import os
 import sys
-import json
 import DataAccess.Models.SuicidalComment as DA1
+import DataAccess.Models.PersonalNarrationComment as DA2
 import DataAccess.Utils.Container as Utils
 import Source.POSTagging as pos
 import Source.SentimentAnalysis as SA
-from os import path
 from googleapiclient.discovery import build_from_document
 from googleapiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
@@ -179,39 +178,39 @@ if __name__ == "__main__":
 
     # Insert video comment
     #insert_comment(youtube, args.channelid, args.videoid, args.text)
-    docId=34
     video_comments = get_comments(youtube, args.videoid, None)
 
     container = Utils.Container()
-    count =1
-    for comment in  video_comments.values():
-        for item in comment:
+    count =0
+    for user in video_comments.keys():
+        for text in video_comments[user]:
 
-            tagger = pos.POSTagger(item)
+            tagger = pos.POSTagger(text)
             res = tagger.getFractions()
-            sentiments = SA.SentimentAnalyzer.calculateSentiment(item)
+            sentiments = SA.SentimentAnalyzer.calculateSentiment(text)
 
-            tcomment = DA1.Comment(count,
-                                   docId,
-                                   item,
-                                   "S",
-                                    args.channelid,
-                                    args.videoid,
-                                    res["nnFraction"],
-                                    res["vbFration"],
-                                    res["advFraction"],
-                                    res["prp1Fraction"],
-                                    res["prp2Fraction"],
-                                    res["cleanedToken"],
-                                    sentiments["pos"],
-                                    sentiments["neg"],
-                                    sentiments["neu"],
-                                    sentiments["compound"])
+            tcomment = DA2.PersonalNarrationComment(17,
+                                          text,
+                                          "PN",
+                                           args.channelid,
+                                           args.videoid,
+                                           user,
+                                           -1,
+                                           res["nnFraction"],
+                                           res["vbFration"],
+                                           res["advFraction"],
+                                           res["prp1Fraction"],
+                                           res["prp2Fraction"],
+                                           res["cleanedToken"],
+                                           sentiments["pos"],
+                                           sentiments["neg"],
+                                           sentiments["neu"],
+                                           sentiments["compound"])
 
-            print(container.CommentRepo.insert(tcomment))
-            count = count + 1
-            # print(count)
+            print(container.PersonalNarrationCommentRepo.insert(tcomment))
+            count =count +1;
 
+    print("Count::"+str(count))
 
 
     # if video_comments:
