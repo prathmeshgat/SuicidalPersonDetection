@@ -1,5 +1,5 @@
 __author__ = 'Prathmesh'
-from pymongo import MongoClient
+import pprint
 import DataAccess.Models.SuicidalDocument as DA
 import DataAccess.Models.SuicidalComment as DA1
 import DataAccess.Models.PersonalNarrationDocument as DA2
@@ -10,9 +10,12 @@ from os import path
 import Source.POSTagging as pos
 import Source.SentimentAnalysis as SA
 import json
+import Source.TopicModelling as TM
+import Source.BagOfWords as BG
+import Source.TagCloud as TG
 from bson.objectid import ObjectId
 
-import Source.TopicModelling as TM
+
 
 def topicModellingSuicidalComments():
     container = Utils.Container()
@@ -29,18 +32,48 @@ def topicModellingSuicidalComments():
         print("\n")
         print(item)
 
-def topicModellingSuicidalDocs():
+def frequentWordsSuicidalComments():
     container = Utils.Container()
-    res = container.SuicidalDocumentRepo.getAll()
+    res = container.SuicidalCommentRepo.getAll()
 
-    docSet = list()
+    commentSet = list()
     for item in res:
-        docSet.append(item.transcript)
+        commentSet.append(item.text)
 
-    topicsModel = TM.TopicModelling(docSet,5,3,10)
-    print("No of documents::"+ str(len(docSet)))
+    model = BG.BagOfWords(commentSet,100)
+    print("No of comments::"+ str(len(commentSet)))
+    wordList = model.topFrequentWords()
+    for item in wordList:
+        print("\n")
+        print(item)
+
+def topicModellingPNComments():
+    container = Utils.Container()
+    res = container.PersonalNarrationCommentRepo.getAll()
+
+    commentSet = list()
+    for item in res:
+        commentSet.append(item.text)
+
+    topicsModel = TM.TopicModelling(commentSet,20,3,10)
+    print("No of comments::"+ str(len(commentSet)))
     topics =topicsModel.getTopics()
     for item in topics:
+        print("\n")
+        print(item)
+
+def frequentWordsPNComments():
+    container = Utils.Container()
+    res = container.PersonalNarrationCommentRepo.getAll()
+
+    commentSet = list()
+    for item in res:
+        commentSet.append(item.text)
+
+    model = BG.BagOfWords(commentSet,100)
+    print("No of comments::"+ str(len(commentSet)))
+    wordList = model.topFrequentWords()
+    for item in wordList:
         print("\n")
         print(item)
 
@@ -59,20 +92,61 @@ def topicModellingPNDocs():
         print("\n")
         print(item)
 
-def topicModellingPNComments():
+def frequentWordsPNDocs():
     container = Utils.Container()
-    res = container.PersonalNarrationCommentRepo.getAll()
+    res = container.PersonalNarrationDocumentRepo.getAll()
 
-    commentSet = list()
+    docSet = list()
     for item in res:
-        commentSet.append(item.text)
+        docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(commentSet,20,3,10)
-    print("No of comments::"+ str(len(commentSet)))
+    model = BG.BagOfWords(docSet,100)
+    print("No of Docs::"+ str(len(docSet)))
+    wordList = model.topFrequentWords()
+    for item in wordList:
+        print("\n")
+        print(item)
+
+def topicModellingSuicidalDocs():
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.transcript)
+
+    topicsModel = TM.TopicModelling(docSet,5,3,10)
+    print("No of documents::"+ str(len(docSet)))
     topics =topicsModel.getTopics()
     for item in topics:
         print("\n")
         print(item)
+
+def frequentWordsSuicidalDocs():
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.transcript)
+
+    model = BG.BagOfWords(docSet,100)
+    print("No of Docs::"+ str(len(docSet)))
+    wordList = model.topFrequentWords()
+    for item in wordList:
+        print("\n")
+        print(item)
+
+def tagCloudSuicidalDocs():
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+
+    docSet = list()
+    for item in res:
+        docSet.append(item.transcript)
+
+    model = TG.TagCloud(docSet)
+    model.tagCloud()
 
 def CreateDB():
     container = Utils.Container()
@@ -285,13 +359,43 @@ def crudPNDocs():
     for item in res:
         print(item.__dict__)
 
+def avgSentimentComments():
+    container = Utils.Container()
+
+    res = container.SuicidalDocumentRepo.getAvrageSentiment()
+    print("\nAverage Sentiment Suicidal docs::\n")
+    print(res)
+
+    res = container.PersonalNarrationDocumentRepo.getAvrageSentiment()
+    print("\nAverage Sentiment PN docs::\n")
+    print(res)
+
+    res = container.SuicidalCommentRepo.getAvrageSentiment()
+    print("\nAverage Sentiment Suicidal Comments::")
+    print(res)
+
+    res = container.PersonalNarrationCommentRepo.getAvrageSentiment()
+    print("\nAverage Sentiment PN Comment::")
+    print(res)
+
+
+# frequentWordsSuicidalDocs()
+
 # topicModellingSuicidalDocs()
+
+# frequentWordsSuicidalComments()
 
 # topicModellingSuicidalComments()
 
+# frequentWordsPNDocs()
+
 # topicModellingPNDocs()
 
+# frequentWordsPNComments()
+
 # topicModellingPNComments()
+
+# avgSentimentComments()
 
 # crudSuicidalDocs()
 
@@ -305,11 +409,12 @@ def crudPNDocs():
 
 # CreateCommentsDB()
 
-# import pprint
+# tagCloudSuicidalDocs()
+
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
-# container.PersonalNarrationCommentRepo.cleanCollection()
-# res = container.PersonalNarrationCommentRepo.getAll()
+# # container.PersonalNarrationCommentRepo.cleanCollection()
+# res = container.SuicidalDocumentRepo.getAll()
 # count =0
 # for item in res:
 #     print("\n")
