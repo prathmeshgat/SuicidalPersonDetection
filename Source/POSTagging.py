@@ -33,30 +33,75 @@ class POSTagger:
         nounCount =0
         verbCount=0
         adverbCount=0
-        personalPronounCount = 0
-        posessivePronounCount = 0
+        pronounCount = 0
+        pastTense = 0
+        presentTense = 0
+        futureTense = 0
+        adjectiveCount =0
 
         for item in tagged_tokens_dict.keys():
             count = count + tagged_tokens_dict[item]
+
+            if(item == 'VBD'):
+                pastTense = pastTense + tagged_tokens_dict[item]
+            if(item == 'VBN'):
+                pastTense = pastTense + tagged_tokens_dict[item]
+
+            if(item == 'VBG'):
+                presentTense = presentTense + tagged_tokens_dict[item]
+            if(item == 'VBZ'):
+                presentTense = presentTense + tagged_tokens_dict[item]
+            if(item == 'VBP'):
+                presentTense = presentTense + tagged_tokens_dict[item]
+
+            if(item == 'MD'):
+                futureTense = tagged_tokens_dict[item]
+
+            if(item == 'RB'):
+                adverbCount = adverbCount + tagged_tokens_dict[item]
+            if(item == 'WRB'):
+                adverbCount = adverbCount + tagged_tokens_dict[item]
+            if(item == 'RBR'):
+                adverbCount = adverbCount + tagged_tokens_dict[item]
+            if(item == 'RBS'):
+                adverbCount = adverbCount + tagged_tokens_dict[item]
+
+            if(item == 'JJ'):
+                adjectiveCount = adjectiveCount + tagged_tokens_dict[item]
+            if(item == 'JJR'):
+                adjectiveCount = adjectiveCount + tagged_tokens_dict[item]
+            if(item == 'JJS'):
+                adjectiveCount = adjectiveCount + tagged_tokens_dict[item]
+
+            if(item == 'PRP'):
+                pronounCount = pronounCount + tagged_tokens_dict[item]
+            if(item == 'PRP$'):
+                pronounCount = pronounCount + tagged_tokens_dict[item]
+            if(item == 'WP$'):
+                pronounCount = pronounCount + tagged_tokens_dict[item]
+
             if(item == 'NN'):
-                nounCount = tagged_tokens_dict[item]
+                nounCount = nounCount + tagged_tokens_dict[item]
+            if(item == 'NNS'):
+                nounCount = nounCount + tagged_tokens_dict[item]
+            if(item == 'NNP'):
+                nounCount = nounCount + tagged_tokens_dict[item]
+            if(item == 'NNPS'):
+                nounCount = nounCount + tagged_tokens_dict[item]
+
             if(item == 'VB'):
                 verbCount = tagged_tokens_dict[item]
-            if(item == 'RB'):
-                adverbCount = tagged_tokens_dict[item]
-            if(item == 'PRP'):
-                personalPronounCount = tagged_tokens_dict[item]
-            if(item == 'PRP$'):
-                posessivePronounCount = tagged_tokens_dict[item]
-
 
         res ={
             'cleanedToken':word_tokenize(self.textData),
-            'nnFraction': (0 if count ==0 else nounCount/count),
-            'vbFration': (0 if count ==0 else verbCount/count),
+            'pastTenseFraction':(0 if count ==0 else ((pastTense)/count)),
+            'presentTenseFraction':(0 if count ==0 else ((presentTense)/count)),
+            'futureTenseFraction':(0 if count ==0 else ((futureTense)/count)),
             'advFraction':(0 if count ==0 else adverbCount/count) ,
-            'prp1Fraction':(0 if count ==0 else personalPronounCount/count),
-            'prp2Fraction':(0 if count ==0 else posessivePronounCount/count)
+            'adjFraction':(0 if count ==0 else adjectiveCount/count) ,
+            'pronounFraction':(0 if count ==0 else pronounCount/count) ,
+            'nounFraction': (0 if count ==0 else nounCount/count),
+            'vbFration': (0 if count ==0 else verbCount/count)
             }
 
         return res

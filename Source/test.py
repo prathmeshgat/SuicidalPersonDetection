@@ -164,16 +164,20 @@ def CreateDB():
 
             sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
 
-            Doc = DA.SuicidalDocument(fileCount,
+            Doc = DA.SuicidalDocument(
+                              fileCount,
                               data,
                               "S",
                               -1,
-                              res["nnFraction"],
-                              res["vbFration"],
-                              res["advFraction"],
-                              res["prp1Fraction"],
-                              res["prp2Fraction"],
-                              res["cleanedToken"],
+                              res['pastTenseFraction'],
+                              res['presentTenseFraction'],
+                              res['futureTenseFraction'],
+                              res['advFraction'],
+                              res['adjFraction'],
+                              res['pronounFraction'],
+                              res['nounFraction'],
+                              res['vbFration'],
+                              res['cleanedToken'],
                               sentiments["pos"],
                               sentiments["neg"],
                               sentiments["neu"],
@@ -193,16 +197,20 @@ def CreateDB():
 
             sentiments = SA.SentimentAnalyzer.calculateSentiment(data)
 
-            Doc = DA2.PersonalNarrationDocument(fileCount,
+            Doc = DA2.PersonalNarrationDocument(
+                              fileCount,
                               data,
                               "PN",
                               -1,
-                              res["nnFraction"],
-                              res["vbFration"],
-                              res["advFraction"],
-                              res["prp1Fraction"],
-                              res["prp2Fraction"],
-                              res["cleanedToken"],
+                              res['pastTenseFraction'],
+                              res['presentTenseFraction'],
+                              res['futureTenseFraction'],
+                              res['advFraction'],
+                              res['adjFraction'],
+                              res['pronounFraction'],
+                              res['nounFraction'],
+                              res['vbFration'],
+                              res['cleanedToken'],
                               sentiments["pos"],
                               sentiments["neg"],
                               sentiments["neu"],
@@ -223,26 +231,30 @@ def CreateCommentsDB():
             comments = json.loads(data)
 
 
-            for comment in comments["comments"].keys():
-                for item in comments["comments"][comment]:
+            for user in comments["comments"].keys():
+                for item in comments["comments"][user]:
 
                     tagger = pos.POSTagger(item)
                     res = tagger.getFractions()
                     sentiments = SA.SentimentAnalyzer.calculateSentiment(item)
 
-                    tcomment = DA1.SuicidalComment(fileCount,
+                    tcomment = DA1.SuicidalComment(
+                                      fileCount,
                                       item,
                                       "S",
                                       comments["channelId"],
                                       comments["videoId"],
-                                      comment,
+                                      user,
                                       -1,
-                                      res["nnFraction"],
-                                      res["vbFration"],
-                                      res["advFraction"],
-                                      res["prp1Fraction"],
-                                      res["prp2Fraction"],
-                                      res["cleanedToken"],
+                                      res['pastTenseFraction'],
+                                      res['presentTenseFraction'],
+                                      res['futureTenseFraction'],
+                                      res['advFraction'],
+                                      res['adjFraction'],
+                                      res['pronounFraction'],
+                                      res['nounFraction'],
+                                      res['vbFration'],
+                                      res['cleanedToken'],
                                       sentiments["pos"],
                                       sentiments["neg"],
                                       sentiments["neu"],
@@ -413,11 +425,11 @@ def avgSentimentComments():
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
-# # container.PersonalNarrationCommentRepo.cleanCollection()
-# res = container.SuicidalDocumentRepo.getAll()
+# container.PersonalNarrationCommentRepo.cleanCollection()
+# res = container.PersonalNarrationCommentRepo.getAll()
 # count =0
 # for item in res:
-#     print("\n")
+#     # print("\n")
 #     pp.pprint(item.__dict__)
 #     count = count +1
 # print("Count::"+str(count))

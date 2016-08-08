@@ -20,11 +20,14 @@ class SuicidalDocumentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.PersonalNarrationDocument(obj['documentId'],obj['transcript'],obj['category'],obj['_id'],obj['nnFraction'],obj['vbFration'],
-                            obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
-                            obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
-                            obj['compoundSentiment'],obj['custom1'],obj['custom2'],
-                            obj['custom3'],obj['custom4'],obj['custom5'])
+        return Model.PersonalNarrationDocument(
+                            obj['documentId'],obj['transcript'],obj['category'],obj['_id'],
+                            obj['pastTenseFraction'],obj['presentTenseFraction'],
+                            obj['futureTenseFraction'],obj['advFraction'],obj['adjFraction'],
+                            obj['pronounFraction'],obj['nounFraction'],obj['vbFration'],
+                            obj['cleanedToken'],obj['posSentiment'],
+                            obj['negSentiment'],obj['neuSentiment'],
+                            obj['compoundSentiment'])
 
     def get(self,Id):
         document = self.collection.find_one({"documentId": Id})

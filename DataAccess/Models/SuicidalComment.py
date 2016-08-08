@@ -2,9 +2,13 @@ __author__ = 'Prathmesh'
 
 class SuicidalComment:
 
-    def __init__(self,documentId,text,category,channelId,videoId,ownerUserName,_id=-1,nnFraction=0,vbFration=0,advFraction=0,prp1Fraction=0,prp2Fraction=0,
-                 cleanedToken=list(),posSentiment=0,negSentiment=0,neuSentiment=0,compoundSentiment=0,
-                 custom1=None,custom2 =None,custom3 = None,custom4 =None,custom5 = None):
+    def __init__(self,documentId,text,category,channelId,videoId,ownerUserName,_id=-1,
+                 pastTenseFraction=0,presentTenseFraction=0,
+                 futureTenseFraction=0,advFraction=0,adjFraction=0,
+                 pronounFraction=0,nounFraction=0,
+                 vbFration=0,cleanedToken=list(),
+                 posSentiment=0,negSentiment=0,
+                 neuSentiment=0,compoundSentiment=0):
 
         self.documentId = documentId
 
@@ -20,15 +24,21 @@ class SuicidalComment:
 
         self._id = _id
 
-        self.nnFraction = nnFraction
+        self.pastTenseFraction = pastTenseFraction
 
-        self.vbFration = vbFration
+        self.presentTenseFraction = presentTenseFraction
+
+        self.futureTenseFraction = futureTenseFraction
 
         self.advFraction = advFraction
 
-        self.prp1Fraction = prp1Fraction
+        self.adjFraction = adjFraction
 
-        self.prp2Fraction = prp2Fraction
+        self.pronounFraction = pronounFraction
+
+        self.nounFraction = nounFraction
+
+        self.vbFration = vbFration
 
         self.cleanedToken = cleanedToken
 
@@ -39,13 +49,3 @@ class SuicidalComment:
         self.neuSentiment = neuSentiment
 
         self.compoundSentiment = compoundSentiment
-
-        self.custom1 = custom1
-
-        self.custom2 = custom2
-
-        self.custom3 = custom3
-
-        self.custom4 = custom4
-
-        self.custom5 = custom5

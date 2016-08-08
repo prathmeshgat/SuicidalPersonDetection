@@ -1,7 +1,7 @@
 __author__ = 'Prathmesh'
 
 import json
-import DataAccess.Models.SuicidalComment as Model
+import DataAccess.Models.PersonalNarrationComment as Model
 from pymongo import MongoClient
 
 class PersonalNarrationCommentRepo:
@@ -20,11 +20,15 @@ class PersonalNarrationCommentRepo:
         return result
 
     def object_decoder(self,obj):
-        return Model.SuicidalComment(obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['ownerUserName'],obj['_id'],obj['nnFraction'],obj['vbFration'],
-                            obj['advFraction'],obj['prp1Fraction'],obj['prp2Fraction'],
-                            obj['cleanedToken'],obj['posSentiment'],obj['negSentiment'],obj['neuSentiment'],
-                            obj['compoundSentiment'],obj['custom1'],obj['custom2'],
-                            obj['custom3'],obj['custom4'],obj['custom5'])
+        return Model.PersonalNarrationComment(
+                            obj['documentId'],obj['text'],obj['category'],obj['channelId'],obj['videoId'],obj['ownerUserName'],obj['_id'],
+                            obj['pastTenseFraction'],obj['presentTenseFraction'],
+                            obj['futureTenseFraction'],obj['advFraction'],
+                            obj['adjFraction'],obj['pronounFraction'],
+                            obj['nounFraction'],obj['vbFration'],
+                            obj['cleanedToken'],obj['posSentiment'],
+                            obj['negSentiment'],obj['neuSentiment'],
+                            obj['compoundSentiment'])
 
     def get(self,Id):
         comment = self.collection.find_one({"_id": Id})

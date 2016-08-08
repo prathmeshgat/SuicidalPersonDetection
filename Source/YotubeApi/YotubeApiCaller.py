@@ -181,6 +181,7 @@ if __name__ == "__main__":
     video_comments = get_comments(youtube, args.videoid, None)
 
     container = Utils.Container()
+    # container.PersonalNarrationCommentRepo.cleanCollection()
     count =0
     for user in video_comments.keys():
         for text in video_comments[user]:
@@ -189,19 +190,23 @@ if __name__ == "__main__":
             res = tagger.getFractions()
             sentiments = SA.SentimentAnalyzer.calculateSentiment(text)
 
-            tcomment = DA2.PersonalNarrationComment(17,
-                                          text,
-                                          "PN",
+            tcomment = DA2.PersonalNarrationComment(
+                                           17,
+                                           text,
+                                           "PN",
                                            args.channelid,
                                            args.videoid,
                                            user,
                                            -1,
-                                           res["nnFraction"],
-                                           res["vbFration"],
-                                           res["advFraction"],
-                                           res["prp1Fraction"],
-                                           res["prp2Fraction"],
-                                           res["cleanedToken"],
+                                           res['pastTenseFraction'],
+                                           res['presentTenseFraction'],
+                                           res['futureTenseFraction'],
+                                           res['advFraction'],
+                                           res['adjFraction'],
+                                           res['pronounFraction'],
+                                           res['nounFraction'],
+                                           res['vbFration'],
+                                           res['cleanedToken'],
                                            sentiments["pos"],
                                            sentiments["neg"],
                                            sentiments["neu"],
