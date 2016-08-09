@@ -25,7 +25,7 @@ def topicModellingSuicidalComments():
     for item in res:
         commentSet.append(item.text)
 
-    topicsModel = TM.TopicModelling(commentSet,50,3,10)
+    topicsModel = TM.TopicModelling(commentSet,50,3,10,"SuicidalComments.html")
     print("No of comments::"+ str(len(commentSet)))
     topics =topicsModel.getTopics()
     for item in topics:
@@ -55,7 +55,7 @@ def topicModellingPNComments():
     for item in res:
         commentSet.append(item.text)
 
-    topicsModel = TM.TopicModelling(commentSet,20,3,10)
+    topicsModel = TM.TopicModelling(commentSet,20,3,10,"PNComments.html")
     print("No of comments::"+ str(len(commentSet)))
     topics =topicsModel.getTopics()
     for item in topics:
@@ -85,7 +85,7 @@ def topicModellingPNDocs():
     for item in res:
         docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(docSet,5,3,10)
+    topicsModel = TM.TopicModelling(docSet,5,3,10,"PNDocs.html")
     print("No of documents::"+ str(len(docSet)))
     topics =topicsModel.getTopics()
     for item in topics:
@@ -115,7 +115,7 @@ def topicModellingSuicidalDocs():
     for item in res:
         docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(docSet,5,3,10)
+    topicsModel = TM.TopicModelling(docSet,5,3,10,"SuicidalDocs.html")
     print("No of documents::"+ str(len(docSet)))
     topics =topicsModel.getTopics()
     for item in topics:
@@ -425,13 +425,13 @@ def avgSentimentComments():
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
-# container.PersonalNarrationCommentRepo.cleanCollection()
-# res = container.PersonalNarrationCommentRepo.getAll()
+# res = container.SuicidalDocumentRepo.getAll()
 # count =0
 # for item in res:
 #     # print("\n")
 #     pp.pprint(item.__dict__)
 #     count = count +1
 # print("Count::"+str(count))
+
 
 

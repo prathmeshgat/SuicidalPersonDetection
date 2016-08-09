@@ -1,6 +1,7 @@
 __author__ = 'Prathmesh'
 
 import gensim
+import pyLDAvis.gensim
 import os
 import nltk
 from nltk.tokenize import RegexpTokenizer
@@ -13,11 +14,12 @@ from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
 
 class TopicModelling:
 
-    def __init__(self,docSet,noTopics,noWords,noPasses):
+    def __init__(self,docSet,noTopics,noWords,noPasses,visualizationName):
         self.docSet = docSet
         self.noTopics = noTopics
         self.noWords = noWords
         self.noPasses = noPasses
+        self.visualizationName = visualizationName
 
     def preprocessDocSet(self):
         tokenizer = RegexpTokenizer(r'\w+')
@@ -77,6 +79,12 @@ class TopicModelling:
 
         # generate LDA model
         ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=no_topics, id2word = dictionary, passes=no_passes)
+
+        _data = pyLDAvis.gensim.prepare(ldamodel, corpus, dictionary)
+
+        FILE = path.join(os.pardir, "Results/Visualizations/TopicModelling/"+self.visualizationName)
+
+        pyLDAvis.save_html(_data,FILE)
 
         return ldamodel.print_topics(num_topics=no_topics, num_words=no_words)
 
