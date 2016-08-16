@@ -16,7 +16,7 @@ class PersonalNarrationDocumentRepo:
     def insert(self,document):
         _dict = document.__dict__
         del _dict["_id"]
-        result = self.collection.insert(_dict)
+        result = self.collection.insert_one(_dict)
         return result
 
     def object_decoder(self,obj):

@@ -1,9 +1,11 @@
 __author__ = 'Prathmesh'
 import pprint
+import xlrd
 import DataAccess.Models.SuicidalDocument as DA
 import DataAccess.Models.SuicidalComment as DA1
 import DataAccess.Models.PersonalNarrationDocument as DA2
 import DataAccess.Models.PersonalNarrationComment as DA3
+import DataAccess.Models.HappinessScore as DA4
 import DataAccess.Utils.Container as Utils
 import os
 from os import path
@@ -390,6 +392,35 @@ def avgSentimentComments():
     print("\nAverage Sentiment PN Comment::")
     print(res)
 
+def create_hedenometerDataset():
+
+    container = Utils.Container()
+    container.HappinessScoreRepo.cleanCollection()
+
+    filePath = path.join(os.pardir, "Resources/1.xlsx")
+    xl_workbook = xlrd.open_workbook(filePath)
+    xl_sheet = xl_workbook.sheet_by_index(0)
+    print ('Sheet name: %s' % xl_sheet.name)
+
+    # Print all values, iterating through rows and columns
+    num_cols = xl_sheet.ncols   # Number of columns
+    item = DA4.HappinessScore(1,2,3,4,5)
+    for row_idx in range(0, xl_sheet.nrows):    # Iterate through rows
+        # print ('-'*40)
+        print ('Row: %s' % row_idx)   # Print row number
+        tempList = list()
+
+        for col_idx in range(0, num_cols):  # Iterate through columns
+            cell_obj = xl_sheet.cell(row_idx, col_idx)  # Get cell object by row, col
+            tempList.append(cell_obj)
+            # print ('Column: [%s] cell_obj: [%s]' % (col_idx, cell_obj))
+
+        item.language = tempList[0].value
+        item.word = tempList[1].value
+        item.happinessScore = tempList[2].value
+        item.englishWord = tempList[3].value
+        container.HappinessScoreRepo.insert(item)
+        # print(tempList)
 
 # frequentWordsSuicidalDocs()
 
@@ -421,17 +452,23 @@ def avgSentimentComments():
 
 # CreateCommentsDB()
 
+# create_hedenometerDataset()
+
 # tagCloudSuicidalDocs()
 
-# pp = pprint.PrettyPrinter(indent=4)
-# container = Utils.Container()
-# res = container.SuicidalDocumentRepo.getAll()
-# count =0
-# for item in res:
-#     # print("\n")
-#     pp.pprint(item.__dict__)
-#     count = count +1
-# print("Count::"+str(count))
+pp = pprint.PrettyPrinter(indent=4)
+container = Utils.Container()
+res = container.HappinessScoreRepo.getAll()
+count =0
+for item in res:
+    # print("\n")
+    pp.pprint(item.__dict__)
+    count = count +1
+print("Count::"+str(count))
+
+
+
+
 
 
 
