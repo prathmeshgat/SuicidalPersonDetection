@@ -5,6 +5,7 @@ import DataAccess.Repos.SuicidalCommentRepo as Repo2
 import DataAccess.Repos.PersonalNarrationDocumentRepo as Repo3
 import DataAccess.Repos.PersonalNarrationCommentRepo as Repo4
 import DataAccess.Repos.HappinessScoreRepo as Repo5
+import DataAccess.Repos.WordStatisticsRepo as Repo6
 class Container:
 
     def __init__(self):
@@ -13,3 +14,4 @@ class Container:
         self.PersonalNarrationDocumentRepo = Repo3.PersonalNarrationDocumentRepo()
         self.PersonalNarrationCommentRepo = Repo4.PersonalNarrationCommentRepo()
         self.HappinessScoreRepo = Repo5.HappinessScoreRepo()
+        self.WordStatisticsRepo = Repo6.WordStatisticsRepo()

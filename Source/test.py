@@ -6,6 +6,7 @@ import DataAccess.Models.SuicidalComment as DA1
 import DataAccess.Models.PersonalNarrationDocument as DA2
 import DataAccess.Models.PersonalNarrationComment as DA3
 import DataAccess.Models.HappinessScore as DA4
+import DataAccess.Models.WordStatistics as DA5
 import DataAccess.Utils.Container as Utils
 import os
 from os import path
@@ -105,9 +106,12 @@ def frequentWordsPNDocs():
     model = BG.BagOfWords(docSet,100)
     print("No of Docs::"+ str(len(docSet)))
     wordList = model.topFrequentWords()
+    count =0
     for item in wordList:
         print("\n")
         print(item)
+        count = count +1
+    print(count)
 
 def topicModellingSuicidalDocs():
     container = Utils.Container()
@@ -414,13 +418,78 @@ def create_hedenometerDataset():
             cell_obj = xl_sheet.cell(row_idx, col_idx)  # Get cell object by row, col
             tempList.append(cell_obj)
             # print ('Column: [%s] cell_obj: [%s]' % (col_idx, cell_obj))
-
-        item.language = tempList[0].value
-        item.word = tempList[1].value
-        item.happinessScore = tempList[2].value
-        item.englishWord = tempList[3].value
-        container.HappinessScoreRepo.insert(item)
+        if(tempList[0].value == "english"):
+            item.language = tempList[0].value
+            item.word = tempList[1].value.replace(" ", "")
+            item.happinessScore = tempList[2].value
+            item.englishWord = tempList[3].value.replace(" ", "")
+            print(container.HappinessScoreRepo.insert(item))
+            print("\n"+item.word)
         # print(tempList)
+
+def createWordStatDB():
+    container = Utils.Container()
+    container.WordStatisticsRepo.cleanCollection()
+
+    SwordDict = dict()
+    PNwordDict = dict()
+
+    wordStatObj = DA5.WordStatistics("a",10,12,12,0,0,0)
+
+    SDocSetCursor = container.SuicidalDocumentRepo.getAll()
+    SdocSet = list()
+
+    for item in SDocSetCursor:
+        SdocSet.append(item.transcript)
+
+    model1 = BG.BagOfWords(SdocSet,-1)
+    SwordDict = model1.wordFrequency()
+
+    PNDocSetCursor = container.PersonalNarrationDocumentRepo.getAll()
+    PNdocSet = list()
+
+    for item in PNDocSetCursor:
+        PNdocSet.append(item.transcript)
+
+    model2 = BG.BagOfWords(PNdocSet,-1)
+    PNwordDict = model2.wordFrequency()
+
+    hedenometerCursor = container.HappinessScoreRepo.getAll()
+    for item in hedenometerCursor:
+        wordStatObj.word = item.word
+        wordStatObj.happinessScore = item.happinessScore
+        wordStatObj.personalNarrationCorpusCount = (PNwordDict[item.englishWord.lower()] if (item.englishWord.lower() in PNwordDict.keys()) else 0)
+        wordStatObj.suicidalCorpusCount = (SwordDict[item.englishWord.lower()] if (item.englishWord.lower() in SwordDict.keys()) else 0)
+        wordStatObj.difference = abs(wordStatObj.personalNarrationCorpusCount - wordStatObj.suicidalCorpusCount)
+        print(container.WordStatisticsRepo.insert(wordStatObj))
+
+def getAvrageHappinessScoreSuicidalDocs():
+    container = Utils.Container()
+
+    res = container.WordStatisticsRepo.getAll()
+    happinessValue = 0
+    count = 0
+    for item in res:
+        if(item.suicidalCorpusCount!=0):
+            happinessValue = happinessValue + item.happinessScore
+            count = count +1
+
+    print("Count::"+str(happinessValue/count))
+    return (happinessValue/count)
+
+def getAvrageHappinessScorePNDocs():
+    container = Utils.Container()
+
+    res = container.WordStatisticsRepo.getAll()
+    happinessValue = 0
+    count = 0
+    for item in res:
+        if(item.personalNarrationCorpusCount!=0):
+            happinessValue = happinessValue + item.happinessScore
+            count = count +1
+
+    print("Count::"+str(happinessValue/count))
+    return (happinessValue/count)
 
 # frequentWordsSuicidalDocs()
 
@@ -456,16 +525,36 @@ def create_hedenometerDataset():
 
 # tagCloudSuicidalDocs()
 
+# createWordStatDB()
+
+# getAvrageHappinessScorePNDocs()
+
+# getAvrageHappinessScoreSuicidalDocs()
+
+CN = getAvrageHappinessScorePNDocs()
+CS = getAvrageHappinessScoreSuicidalDocs()
 pp = pprint.PrettyPrinter(indent=4)
 container = Utils.Container()
-res = container.HappinessScoreRepo.getAll()
+res = container.WordStatisticsRepo.getAll()
 count =0
 for item in res:
-    # print("\n")
-    pp.pprint(item.__dict__)
-    count = count +1
+    print("\n")
+    if(item.difference!=0):
+        pp.pprint(item.__dict__)
+        count = count +1
 print("Count::"+str(count))
 
+# pp = pprint.PrettyPrinter(indent=4)
+# container = Utils.Container()
+# res = container.HappinessScoreRepo.getAll()
+# count =0
+# for item in res:
+#     # print("\n")
+#     if(item.word == "without"):
+#         count = count +1
+#     pp.pprint(item.__dict__)
+#     # count = count +1
+# print("Count::"+str(count))
 
 
 
