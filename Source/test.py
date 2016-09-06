@@ -1,5 +1,6 @@
 __author__ = 'Prathmesh'
 import pprint
+import csv
 import xlrd
 import DataAccess.Models.SuicidalDocument as DA
 import DataAccess.Models.SuicidalComment as DA1
@@ -470,9 +471,8 @@ def getAvrageHappinessScoreSuicidalDocs():
     happinessValue = 0
     count = 0
     for item in res:
-        if(item.suicidalCorpusCount!=0):
-            happinessValue = happinessValue + item.happinessScore
-            count = count +1
+        happinessValue = happinessValue + (item.happinessScore *item.suicidalCorpusCount)
+        count = count +item.suicidalCorpusCount
 
     print("Count::"+str(happinessValue/count))
     return (happinessValue/count)
@@ -484,12 +484,87 @@ def getAvrageHappinessScorePNDocs():
     happinessValue = 0
     count = 0
     for item in res:
-        if(item.personalNarrationCorpusCount!=0):
-            happinessValue = happinessValue + item.happinessScore
-            count = count +1
+        happinessValue = happinessValue + (item.happinessScore * item.personalNarrationCorpusCount)
+        count = count + item.personalNarrationCorpusCount
 
     print("Count::"+str(happinessValue/count))
     return (happinessValue/count)
+
+def calculatePctHappinessShiftDocs():
+    CN = getAvrageHappinessScorePNDocs()
+    CS = getAvrageHappinessScoreSuicidalDocs()
+    pp = pprint.PrettyPrinter(indent=4)
+    container = Utils.Container()
+    res = container.WordStatisticsRepo.getAll()
+    count =0
+    for item in res:
+        print("\n")
+        if(item.personalNarrationCorpusCount!=0):
+            item.pctHappinessShiftPN = ((item.happinessScore-CN)/(CN))*100.0
+        else:
+            item.pctHappinessShiftPN =0.0
+
+        if(item.suicidalCorpusCount!=0):
+            item.pctHappinessShiftSui = ((item.happinessScore-CS)/(CS))*100.0
+        else:
+            item.pctHappinessShiftSui =0
+
+        container.WordStatisticsRepo.update(item)
+
+        if(item.difference!=0):
+            pp.pprint(item.__dict__)
+            count = count +1
+            # if(count==50):
+            #     break
+    print("Count::"+str(count))
+
+def createwordChartCSV():
+    CSV_FILE = path.join(os.pardir, "Resources/chart.csv")
+    csvfile = open(CSV_FILE, 'w')
+    fieldnames = ['Word','Value']
+    writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=fieldnames)
+    writer.writeheader()
+    graphList = list()
+    pp = pprint.PrettyPrinter(indent=4)
+    container = Utils.Container()
+    res = container.WordStatisticsRepo.getAll()
+    count =0
+    for item in res:
+        print("\n")
+        pp.pprint(item.__dict__)
+        if(item.difference!=0):
+            count = count +1
+
+            if(item.suicidalCorpusCount>item.personalNarrationCorpusCount):
+                side = "right"
+                arrow = "up"
+                value = abs(item.pctHappinessShiftSui)
+            else:
+                side= "left"
+                arrow ="down"
+                value = -(abs(item.pctHappinessShiftSui))
+            if(item.pctHappinessShiftSui>0):
+                color = "yellow"
+            else:
+                color= "blue"
+
+            word = item.englishWord
+            graphList.append(
+                {'word':word,
+                 'value':value,
+                 'arrowDirection':arrow,
+                 'color':color,
+                 'side':side
+                 })
+            writer.writerow({'Word': word, 'Value': value})
+            if(count==50):
+                break
+    print("Count::"+str(count))
+
+    for item in graphList:
+        print("\n")
+        pp.pprint(item)
+
 
 # frequentWordsSuicidalDocs()
 
@@ -531,18 +606,9 @@ def getAvrageHappinessScorePNDocs():
 
 # getAvrageHappinessScoreSuicidalDocs()
 
-CN = getAvrageHappinessScorePNDocs()
-CS = getAvrageHappinessScoreSuicidalDocs()
-pp = pprint.PrettyPrinter(indent=4)
-container = Utils.Container()
-res = container.WordStatisticsRepo.getAll()
-count =0
-for item in res:
-    print("\n")
-    if(item.difference!=0):
-        pp.pprint(item.__dict__)
-        count = count +1
-print("Count::"+str(count))
+# calculatePctHappinessShiftDocs()
+
+# createwordChartCSV()
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
@@ -555,8 +621,6 @@ print("Count::"+str(count))
 #     pp.pprint(item.__dict__)
 #     # count = count +1
 # print("Count::"+str(count))
-
-
 
 
 
