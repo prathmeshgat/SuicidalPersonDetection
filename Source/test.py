@@ -457,7 +457,7 @@ def createWordStatDB():
 
     hedenometerCursor = container.HappinessScoreRepo.getAll()
     for item in hedenometerCursor:
-        wordStatObj.word = item.word
+        wordStatObj.word = item.englishWord
         wordStatObj.happinessScore = item.happinessScore
         wordStatObj.personalNarrationCorpusCount = (PNwordDict[item.englishWord.lower()] if (item.englishWord.lower() in PNwordDict.keys()) else 0)
         wordStatObj.suicidalCorpusCount = (SwordDict[item.englishWord.lower()] if (item.englishWord.lower() in SwordDict.keys()) else 0)
@@ -530,8 +530,8 @@ def createwordChartCSV():
     res = container.WordStatisticsRepo.getAll()
     count =0
     for item in res:
-        print("\n")
-        pp.pprint(item.__dict__)
+        # print("\n")
+        # pp.pprint(item.__dict__)
         if(item.difference!=0):
             count = count +1
 
@@ -539,16 +539,21 @@ def createwordChartCSV():
                 side = "right"
                 arrow = "up"
                 value = abs(item.pctHappinessShiftSui)
+                if(item.pctHappinessShiftSui>0):
+                    color = "yellow"
+                else:
+                    color= "blue"
             else:
                 side= "left"
                 arrow ="down"
-                value = -(abs(item.pctHappinessShiftSui))
-            if(item.pctHappinessShiftSui>0):
-                color = "yellow"
-            else:
-                color= "blue"
+                value = -(abs(item.pctHappinessShiftPN))
 
-            word = item.englishWord
+                if(item.pctHappinessShiftPN>0):
+                    color = "yellow"
+                else:
+                    color= "blue"
+
+            word = item.word
             graphList.append(
                 {'word':word,
                  'value':value,
@@ -556,14 +561,16 @@ def createwordChartCSV():
                  'color':color,
                  'side':side
                  })
-            writer.writerow({'Word': word, 'Value': value})
             if(count==50):
                 break
-    print("Count::"+str(count))
 
+    print("Count::"+str(count))
+    graphList = sorted(graphList, key=lambda k: abs(k['value']))
     for item in graphList:
         print("\n")
         pp.pprint(item)
+        writer.writerow({'Word': item['word'], 'Value': item['value']})
+
 
 
 # frequentWordsSuicidalDocs()
