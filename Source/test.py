@@ -571,7 +571,61 @@ def createwordChartCSV():
         pp.pprint(item)
         writer.writerow({'Word': item['word'], 'Value': item['value']})
 
+def createfeatureSetML():
+    container = Utils.Container()
+    res = container.SuicidalDocumentRepo.getAll()
+    CSV_FILE = path.join(os.pardir, "Resources/Machine-Learning-Files/Features.csv")
+    csvfile = open(CSV_FILE, 'w')
 
+    fieldnames = ['pastTenseFraction',
+                  'presentTenseFraction',
+                  'futureTenseFraction',
+                  'advFraction',
+                  'adjFraction',
+                  'pronounFraction',
+                  'nounFraction',
+                  'vbFration',
+                  'Class',
+                  'ClassBool']
+
+    writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=fieldnames)
+    writer.writeheader()
+
+    for item in res:
+        writer.writerow(
+            {
+                'pastTenseFraction':  item.pastTenseFraction,
+                'presentTenseFraction':  item.presentTenseFraction,
+                'futureTenseFraction':   item.futureTenseFraction,
+                'advFraction': item.advFraction,
+                'adjFraction':  item.adjFraction,
+                'pronounFraction':item.pronounFraction ,
+                'nounFraction':  item.nounFraction,
+                'vbFration':  item.vbFration,
+                'Class': 'S',
+                'ClassBool': 1
+            }
+        )
+
+    res = container.PersonalNarrationDocumentRepo.getAll()
+
+    for item in res:
+        writer.writerow(
+            {
+                'pastTenseFraction':  item.pastTenseFraction,
+                'presentTenseFraction':  item.presentTenseFraction,
+                'futureTenseFraction':   item.futureTenseFraction,
+                'advFraction': item.advFraction,
+                'adjFraction':  item.adjFraction,
+                'pronounFraction':item.pronounFraction ,
+                'nounFraction':  item.nounFraction,
+                'vbFration':  item.vbFration,
+                'Class': 'P',
+                'ClassBool': 0
+            }
+        )
+
+    csvfile.close()
 
 # frequentWordsSuicidalDocs()
 
@@ -616,6 +670,8 @@ def createwordChartCSV():
 # calculatePctHappinessShiftDocs()
 
 # createwordChartCSV()
+
+createfeatureSetML()
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
