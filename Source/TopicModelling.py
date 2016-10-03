@@ -4,6 +4,7 @@ import gensim
 import pyLDAvis.gensim
 import os
 import nltk
+import numpy as np
 from nltk.tokenize import RegexpTokenizer
 from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
@@ -80,13 +81,55 @@ class TopicModelling:
         # generate LDA model
         ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=no_topics, id2word = dictionary, passes=no_passes)
 
-        _data = pyLDAvis.gensim.prepare(ldamodel, corpus, dictionary)
+        # _data = pyLDAvis.gensim.prepare(ldamodel, corpus, dictionary)
 
-        FILE = path.join(os.pardir, "Results/Visualizations/TopicModelling/"+self.visualizationName)
+        # FILE = path.join(os.pardir, "Results/Visualizations/TopicModelling/"+self.visualizationName)
 
-        pyLDAvis.save_html(_data,FILE)
+        # pyLDAvis.save_html(_data,FILE)
 
         return ldamodel.print_topics(num_topics=no_topics, num_words=no_words)
+
+    def lda_apply_with_propensity(self):
+
+         #pre-process Suicidal Doc set
+        Tokens = self.preprocessDocSet()
+
+        # turn our tokenized documents into a id <-> term dictionary
+        dictionary = corpora.Dictionary(Tokens)
+
+        # convert tokenized documents into a document-term matrix
+        corpus = [dictionary.doc2bow(text) for text in Tokens]
+
+        # num topics
+        parameter_list=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+        # for num_topics_value in num_topics_list:
+        for parameter_value in parameter_list:
+
+            # split into 80% training and 20% test sets
+            np.random.shuffle(corpus)
+            p = int(len(corpus) * .8)
+            cp_train = corpus[0:p]
+            cp_test = corpus[p:]
+
+            ldamodel = gensim.models.ldamodel.LdaModel(cp_train, num_topics=3, id2word = dictionary,
+                                                       passes=25,update_every=0, alpha=None, eta=None,chunksize=3125,decay=0.5)
+
+            # perplex = ldamodel.bound(cp_test)
+
+            per_word_perplex = ldamodel.log_perplexity(cp_test, total_docs=None)
+
+            count =0
+            for document in cp_test:
+                for word in document:
+                    count = count +1
+
+            perplex = np.exp2(-per_word_perplex / count)
+
+            # perplex = np.exp2(-per_word_perplex / sum(cnt for document in cp_test for _, cnt in document))
+
+            print("Topics:: "+str(parameter_value)+" Perplexity: "+ str(perplex)+" Per-word Perplexity: " +str(per_word_perplex))
 
     def getTopics(self):
 

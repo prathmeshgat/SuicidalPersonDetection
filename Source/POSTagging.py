@@ -29,7 +29,7 @@ class POSTagger:
 
         # print(tagged_tokens_dict)
 
-        count =0;
+        count =0
         nounCount =0
         verbCount=0
         adverbCount=0

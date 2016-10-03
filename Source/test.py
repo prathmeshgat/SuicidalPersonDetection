@@ -129,6 +129,8 @@ def topicModellingSuicidalDocs():
         print("\n")
         print(item)
 
+    topicsModel.lda_apply_with_propensity()
+
 def frequentWordsSuicidalDocs():
     container = Utils.Container()
     res = container.SuicidalDocumentRepo.getAll()
@@ -629,7 +631,7 @@ def createfeatureSetML():
 
 # frequentWordsSuicidalDocs()
 
-# topicModellingSuicidalDocs()
+topicModellingSuicidalDocs()
 
 # frequentWordsSuicidalComments()
 
@@ -671,7 +673,7 @@ def createfeatureSetML():
 
 # createwordChartCSV()
 
-createfeatureSetML()
+# createfeatureSetML()
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
