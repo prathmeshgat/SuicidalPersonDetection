@@ -161,8 +161,7 @@ def CreateDB():
     container = Utils.Container()
     container.SuicidalDocumentRepo.cleanCollection()
 
-    for fileCount in range(1, 18):
-        if fileCount!= 14:
+    for fileCount in range(1, 100):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Suicidal/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
             data = fp.read()
@@ -195,7 +194,7 @@ def CreateDB():
             print(container.SuicidalDocumentRepo.insert(Doc))
 
     container.PersonalNarrationDocumentRepo.cleanCollection()
-    for fileCount in range(1, 18):
+    for fileCount in range(1, 100):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
             data = fp.read()

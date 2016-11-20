@@ -1,0 +1,214 @@
+In 1972, the musical group Funkadelic
+released one of my favorite songs, "Biological Speculation".
+If you don't know the song,
+I want to share it at the beginning of the course with you.
+We're just biological speculation, sitting here, vibrating.
+And we don't know what were vibrating about.
+Also in 1972 and 1973,
+researchers at Stanford and at San Francisco invented
+what became known as Genetic Engineering,
+the ability to take natural pieces of DNA and recombine them
+to make new chimeric molecules.
+Oh, that's interesting.
+How would we, members of the clan of opposable thumbs
+who like to do things
+apply this new tool if we don't know what we're vibrating about?
+Forty years have gone by, roughly,
+it's been a generation of genetic engineering
+and we've already heard today that it's been used.
+We've made foods. We've made medicines.
+We've made stuff, recombinant insulin for treating diabetes,
+engineered L-lysine
+for better laundry detergents to wash your clothes,
+and even, better ice-cream.
+Those anti-freeze proteins from fish that go in the ice-cream,
+so you don't get the big ice crystals in your low-fat ice-cream.
+Isn't it funny that ice-cream isn't marketed as Nemo bits?
+(Laughter)
+"Mommy, mommy, mommy, I want some Nemo bit ice-cream!"
+Oh, it's strange, you know, this technology, as we've explored it,
+we haven't always been comfortable with it.
+And there are good reasons for that:
+maybe it's not safe, maybe it disrupts the purity,
+maybe it messes up the normative aspects of nature.
+Maybe it's just new.
+How could we do better?
+How could we start to talk in new ways about biotechnology?
+I don't know.
+And I thought about that a lot.
+One of the things that I had to confront
+is I'm not always sure how I make decisions,
+and how I determine whether or not
+a choice I'm facing results in a good decision.
+And if I can't answer that question
+is very hard for me to consider any technology,
+especially living technology,
+and decide what to do with it.
+As best as I can figure it out,
+I [together with] my wife, who is also a biotechnologist,
+talked about this a lot,
+we've come up with a framework
+for thinking about whether or not we are making good decisions.
+And the way we've come up with this framework
+is to listen to nature, to return to nature,
+and to try and understand biology, actually.
+And what I mean by that
+- this will sound a little hokey and should sound a little bit abstract,
+but then I'll try to make it real for you -
+biology, as I understand it, exists on an energy gradient:
+we're powered from the stars, from the Sun, from the thermovents;
+and living systems tap into this flux, this flow of energy,
+and they are somehow able to do something incredible.
+They are able to make patterns
+that persist over time from one generation to the next.
+Very improbable patterns.
+If you were talking to a chemist about what a system should do,
+thermodynamically speaking, it just all blur away.
+But life is somehow capturing this energy gradient
+and making these improbable patterns
+that persist over time from one generation to the next.
+That's what it means to me to be alive.
+And if I believe that, then I can start to evaluate,
+"Am I making a good decision or a bad decision?"
+What I want to be doing is I want to be alive,
+I want to be contributing to life.
+If I do something,
+and it's more likely to lead to more improbability,
+more improbable patterns that continue to thrive and exist,
+then that was a good decision.
+I'm not expecting all of you to be satisfied by that,
+that's just me being honest with you.
+What does that have to do with making our civilization work,
+thinking about how to make decisions about advancing biotechnology?
+When I was biking in this morning to come over here,
+I was looking at the pine tree, in the front yard of our house.
+We live over in Menlo Park.
+And it's that time of year where the pine tree is doing this.
+It's growing these objects.
+(whispers) They're called pine cones.
+(Laughter)
+For the longest time, until about two years ago,
+I didn't think very much about my pine tree
+- that's not really mine, it's sort of in front of my yard,
+and whatever that means -
+but over the last couple of years,
+I haven't been able to escape what's going on: in a few short weeks,
+the tree will grow hundreds if not thousands of these objects,
+that will become quite big, almost as big as a can of tennis balls.
+What do I do with this?
+Nothing.
+The winds come in the fall,
+it falls off,
+it gets swept up and composted.
+As I've looked into this
+across the town of Menlo Park, the gardens and lawns of Menlo Park,
+we produce about 500 pounds per person per year of garden clippings
+in a town of 32,000 people,
+that's 16 million pounds of matter compiled from the atmosphere.
+This is actually a state-of-the-art nanotechnology;
+what could I do with it?
+Maybe I could change how we make things.
+Maybe I could--
+could I reprogram my pine tree to grow computer chips?
+Could this turn into something different?
+That sounds really improbable.
+Well, engineering is often times about solving problems,
+but at a meta-level, what engineering is also about,
+is getting better at solving problems.
+And so, in 2002, we set out to ask the question:
+could we make living matter fully engineerable?
+Could we make life programmable?
+Could I ever get to a future
+where I can grow computer chips in my front yard?
+Sounds implausible.
+But if you look back in time,
+engineers do get a lot better at doing things.
+70 years ago,
+we weren't very good at engineering electrical computing systems.
+Several generations later, we were quite good at it.
+What should we aspire to get good at this century?
+We hear about the climate, we hear about the loss of [ozone];
+what should we do?
+Maybe we should get really good at engineering matter.
+And of course it will take us 70 years, but we better get started now.
+To work on that, I got support from DARPA,
+the Defense Advanced Research Projects Agency, in 2002.
+And we didn't do any research, we just went and talked
+about how we would make engineering and biology easier.
+And by October of 2003, we had met a half dozen times
+with 50 of the smartest people we could find.
+I went and gave a briefing to the director of the Federal Agency,
+"Mr. Director, here is the plan:
+get a lot better at printing DNA from scratch,
+so people can become designers of biology,
+and other people can become builders.
+Figure out how to abstract biological complexity
+so that you don't have to program your DNA down at the machine level:
+TAATACGACTCACTATAGGAGA.
+Who can remember all that?
+(Laughter)
+And then develop standards to coordinate labor
+when we measure something; how do I share that measurement?
+Like the meter stick, but for inside the cell.
+I gave that briefing in October of 2003
+and it went over like a lead balloon.
+Why?
+It's a challenging time.
+The anthrax attacks had happened TWO years earlier;
+people were scared of biology, let alone getting better ar engineering,
+but if you have DNA printers,
+the garagistas working in their garages might print the genomes of viruses
+that will be released and we'll have bio-terrorists everywhere.
+Cut the funding, which was what happened.
+And so we had this weird environment
+of this idea of programming living matter
+could be really helpful;
+it could actually make things work,
+but also sounds really dangerous: could make things not work at all.
+And it just kept going back and forth in the conversation, politically.
+I call this the "half pipe of doom".
+(Laughter)
+The problem with the "half pipe of doom" is it consumes all the attention
+and the much more interesting thing is to figure out what to do in the middle.
+It turns out the answer was to take it to the people;
+the artists, the designers, and the teenagers.
+We started something that's now called "IGEMC",
+the International Genetically Engineered Machines Competition.
+The first class of students were 16 students in 2003.
+This year, there are over 250 teams across 40 countries all over the planet
+where students will spend their summer designing and building
+living organisms to solve a problem wherever they are.
+They work well together,
+because they are sharing the bits and pieces of DNA, freely with each other.
+As this has progressed, institutions have returned.
+At Stanford for example, we have a new department in our campus,
+- new in a sense of being 10 years old -
+but a new department, in this case called Bioengineering;
+it doesn't happen that often.
+The last time we started a department of that scale,
+it was called Computer Science.
+(Laughter)
+The building for the department will open next month.
+Can we do it?
+I think so.
+I probably won't be able to reprogram a pine tree in my life time,
+because it'll take too long,
+but I can probably reprogram a wood fungus that eats sawdust
+that converts the sawdust into chitin as a type of plastic;
+I can bring into that organism a capacity from the oceans
+to do bio-mineralization to make silica and metals.
+And if you give me 10 or 20 years,
+I'd bet I can change how we make things.
+But what's most important is it's not me making things,
+it's biology making things.
+It's already taken over the planet.
+We have a distributive manufacturing platform
+that's capable of putting atoms in precise positions.
+You can program it via DNA.
+The instructions for your DNA can be sent over the Internet as information.
+The natural ecosystem is running on 90 terawatts of power,
+over four times what our civilization consumes.
+We are biological speculation.
+What would you like us to be vibrating about?
+Thank you.
+(Applause)

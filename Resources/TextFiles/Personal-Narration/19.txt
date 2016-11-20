@@ -1,0 +1,254 @@
+So how do we learn?
+And why does some of us learn things more easily than others?
+So, as I just mentioned, I'm doctor Lara Boyd.
+I am a brain researcher here at the University of British Columbia.
+These are the questions that fascinate me.
+(Cheers) (Applause)
+So brain research is one of the great frontiers
+in the understanding of human physiology,
+and also in the consideration of what makes us who we are.
+It's an amazing time to be a brain researcher,
+and I would argue to you
+that I have the most interesting job in the world.
+What we know about the brain is changing at a breathtaking pace.
+And much of what we thought we knew and understood about the brain
+turns out to be not true or incomplete.
+Some of these misconceptions are more obvious than others.
+For example, we used to think
+that after childhood the brain did not, really could not change.
+And it turns out that nothing can be farther than the truth.
+Another misconception about the brain
+is that you only use parts of it at any given time
+and silent it when you do nothing.
+Well, this is also untrue.
+It turns out that even when you're at a rest
+and thinking of nothing, your brain is highly active.
+So it's been advances in technology, such as MRI,
+that's allowed us to make these and many other important discoveries.
+And perhaps the most exciting,
+the most interesting and transformative of these discoveries
+is that, every time you learn a new fact or skill,
+you change your brain.
+It's something we call neuroplasticity.
+So as little as 25 years ago, we thought that after about puberty,
+the only changes that took place in the brain were negative:
+the loss of brain cells with aging,
+resulted damage, like a stroke.
+And then, studies began to show remarkable amounts
+of reorganization in the adult brain.
+And the ensuing research has shown us
+that all of our behaviors change our brain.
+That these changes are not limited by age,
+it's a good news right?
+And in fact, they are taking place all the time.
+And very importantly,
+brain reorganization helps to support recovery
+after you damage your brain.
+The key to each of these changes is neuroplasticity.
+So what does it looks alike?
+So your brain can change in three very basic ways
+to support learning.
+And the first is chemical.
+So brain actually functions by transferring chemicals signals
+between brain cells, what we called neurons,
+and this triggered series of actions and reactions.
+So to support learning, your brain can increase the amount
+through the concentrations of these chemical signaling
+that's taking place between neurons.
+Because this change can happen rapidly,
+this supports short term memory
+or the short term improvement in the performance of a motor skill.
+The second way that the brain can change to support learning
+is by altering its structure.
+So during learning, the brain can change the connections between neurons.
+Here, the physical structure of the brain is actually changing
+so this takes a bit more time.
+These type of changes are related to long term memory,
+the long term improvement in a motor skill.
+These processes interact, and let me give you an example of how.
+We've all tried to learn a new motor skill,
+maybe playing the piano,
+maybe learning to juggle.
+You've had the experience of getting better and better
+within a single session of practice,
+and thinking "I have got it."
+And then, maybe you return the next day,
+and all those improvements from the day before are lost.
+What happened?
+Well, in the short term, your brain was able to increase
+the chemical signaling between your neurons.
+But for some reason, those changes did not induce the structural changes
+that are necessary to support long term memory.
+Remember that long term memories take time.
+And what you see in the short term does not reflect learning,
+It's these physical changes
+that are now going to support long term memories,
+and chemical changes that support short term memories.
+Structural changes also can lead to integrated networks of brain regions
+that function together to support learning.
+And it can also lead to certain brain regions
+that are important for very specific behaviors
+to change your structure or to enlarge.
+So here's some examples of that.
+People who read Braille
+have larger hand sensory areas in their brain than those of us who don't.
+Your dominant hand motor region, which is on the left side of your brain,
+if you are right-handed, is larger than the other side.
+And research shows the London taxi cab drivers
+who actually have to memorize a map of London to get their taxi cab license,
+they have larger brain regions devoted to spacial, or mapping memories.
+The last way that your brain can change to support learning
+is by altering its function.
+As you use a brain region,
+It becomes more and more excitable and easy to use again.
+And as your brain has these areas that increase their excitability,
+the brain shifts how and when they are activated.
+With learning, we see
+that whole networks of brain activity are shifting and changing.
+So neuroplasticity is supported
+by chemical, by structural, and by functional changes,
+and these are happening across the whole brain.
+They can occur in isolation from one or another,
+but most often, they take place in concert.
+Together, they support learning.
+And they're taking place all the time.
+I just told you really how awesomely neuroplastic your brain is.
+Why can't you learn anything you choose to with ease?
+Why do our kids sometimes fail in school?
+Why as we age do we tend to forget things?
+And why don't people fully recover from brain damage?
+That is: what is it that limits and facilitates neuroplasticity?
+And so this is what I study.
+I study specifically how it relates to recovery from stroke.
+Recently, stroke dropped
+from being the third leading cause of the death in the United States
+to be the forth leading cause of the death.
+Great news, right?
+But actually, it turns out
+that the number of people having a stroke has not declined.
+We are just better at keeping people alive after a severe stroke.
+It turns out to be very difficult to help the brain recover from stroke.
+And frankly,
+we have failed to develop effective rehabilitation interventions.
+The net result of this is that stroke is the leading cause
+of long term disability in adults in the world;
+individuals with stroke are younger
+and tending to live longer with that disability,
+and research from my group actually shows
+that the health related quality of life of Canadians with stroke has declined.
+So clearly we need to be better
+at helping people recover from stroke.
+This is an enormous societal problem,
+and it's one that we are not solving.
+So what can be done?
+One thing is absolutely clear:
+the best driver of neuroplastic change in your brain is your behavior.
+The problem is that the dose of behavior, the dose of practice
+that's required to learn new and relearn old motor skills,
+is very large.
+And how to effectively deliver these large doses of practice
+is a very difficult problem; It's also a very expensive problem.
+So the approach that my research has taken
+is to develop therapies that prime or that prepare the brain to learn.
+And these have included brain simulation, exercise, and robotics.
+But through my research, I've realized that a major limitation
+to the development of therapies that speed recovery from stroke
+is that patterns of neuroplasticity are highly variable from person to person.
+As a researcher, variability used to drive me crazy.
+It makes it very difficult to use the statistics
+to test your data and your ideas.
+And because of this, medical intervention studies are
+specifically designed to minimize variability.
+But in my research, it's becoming really clear
+that the most important, the most informative data we collect
+is showing this variability.
+So by studying the brain after stroke, we've learned a lot,
+and I think these lessons are very valuable in other areas.
+The first lesson is
+that the primary driver of change in your brain is your behavior,
+so there is no neuroplasticity drug you can take.
+Nothing is more effective than practice at helping you learn,
+and the bottom line is you have to do the work.
+And in fact, my research has shown
+increased difficulty, increased struggle if you will, during practice,
+actually leads to both more learning,
+and greater structural change in the brain.
+The problem here is that neuroplastcity can work both ways.
+It can be positive, you learn something new,
+and you refine a motor skill.
+And it also can be negative though, you forgot something you once knew,
+you become addicted to drugs,
+maybe you have chronic pain.
+So your brain is tremendously plastic,
+and it's been shaped both structurally and functionally by everything you do,
+but also by everything that you don't do.
+The second lesson we've learned about brain
+is that there is no one-size-fits-all approach to learning.
+So there is no recipe for learning.
+Consider the popular belief that it takes 10,000 hours of practice
+to learn and to master a new motor skill.
+I can assure you it's not quite that simple.
+For some of us,
+it's going to take a lot more practice, and for others it may take far less.
+So the shaping of our plastic brains is far too unique
+for there to be any single intervention that's going to work for all of us.
+This realization has forced us to consider something call personalized medicine.
+This is the idea that to optimize outcomes
+each individual requires their own intervention.
+And the idea actually comes from cancer treatments.
+And here it turns out that genetics are very important in matching
+certain types of chemotherapy with specific forms of cancer.
+My research is showing that this also applies to recovery from stroke.
+There're certain characteristics of brain structure and function
+we called biomarkers.
+And these biomarkers are proving to be very helpful
+and helping us to match
+specific therapies with individual patients.
+The data for my lab suggests it's a combination of biomarkers
+that best predicts neuroplastic change and patterns of recovery after stroke.
+And that's not surprising, given how complicated the human brain is.
+But I also think we can consider this concept much more broadly.
+Given the unique structure and function of each of our brains
+what we've learned about neuroplasticity after stroke applies to everyone.
+Behaviors that you employ in your everyday life are important.
+Each of them is changing your brain.
+And I believe we have to consider
+not just personalized medicine but personalized learning.
+The uniqueness of your brain will affect you
+both as a learner and also as a teacher.
+This idea helps us to understand
+why some children can thrive in tradition education settings
+and others don't;
+why some of us can learn languages easily
+and yet, others can pick up any sport and excel.
+So when you leave this room today,
+your brain will not be the same as when you entered this morning.
+And I think that's pretty amazing.
+But each of you is going to have changed your brain differently.
+Understanding these differences,
+these individual patterns, these variability and change
+is going to enable the next great advance in neuroscience;
+it's going to allow us to develop new and more effective interventions,
+and allow for matches between learners and teachers,
+and patients and interventions.
+And this does not just apply the recovery from stroke,
+it applies to each of us, as a parent, as a teacher, as a manager,
+and also because you are at TEDx today, as a lifelong learner.
+Study how and what you learn best.
+Repeat those behaviors that are healthy for your brain,
+and break those behaviors and habits that are not.
+Practice.
+Learning is about doing the work that your brain requires.
+So the best strategies are going to vary between individuals.
+You know what, they're even going to vary within individuals.
+So for you, learning music may come very easily,
+but learning to snowboard, much harder.
+I hope that you leave today
+with a new appreciation of how magnificent your brain is.
+You and your plastic brain are constantly being shaped by the world around you.
+Understand that everything you do,
+everything you encounter, and everything you experience is changing your brain.
+And that can be for better, but it can also be for worse.
+So when you leave today, go out and build the brain you want.
+Thank you very much.
+(Applause)

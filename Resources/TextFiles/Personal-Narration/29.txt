@@ -1,0 +1,205 @@
+ok i'm here today i'm going to i want to talk about space exploration challenges
+that are still in front of us as we go forward
+we've solved a lot of them in the past but there's a couple of key ones that we
+still haven't solved and i would say we need your help to do that
+so that's what i'm here today to talk about as I was growing up as i was a
+young boy
+many years ago I saw a number of major accomplishments that NASA sheet over the
+years and the biggest one for me was nineteen sixty-two was when John Glenn
+orbited orbited the earth
+that was huge for me I was about 10 years old and that really changed my
+life and i ended up obviously Here I am today I'm working it
+john h plan research center so that was a huge thing for me and and then after
+that point in time we after we orbited the earth then we went to the moon and
+69 and that was a huge event how do we get a person of the move and get them
+back and all that
+how do we just go about doing that so that was a huge and I think NASA had
+like I don't know how many thousands of people work but thousands working on
+their job and we accomplish that and then in the seventies we put started to
+put together the space shuttle and because we wanted to be able to shuttle
+things the lower Thorpe low Earth orbit and we wanted to do it on a regular
+basis two three four five times a year and we try to keep that rate up and and
+so we did that when he has everybody knows we just decommissioned shuttle now
+the station and then in the nineties are in the nineties with the shuttle we
+built the space station which sits up there now and produces about a hundred
+hundred kilowatts of power and there
+three to four astronauts on the station at all times
+so those are huge things that we did and what we need to do
+I mean the goal always was to push people out into deep space and what I
+want to talk about today is there's a couple of challenges that we have that
+are are hitting us that we were having difficulty moving forward and getting
+those challenges solved and moving us forward
+I wanted to start out with this picture this is a picture of Saturn taken by the
+Cassini spacecraft
+ok and the Cassini spacecraft is being darkened by Saturn
+so it's your we just imagine you're on you're on the other side of Saturn and
+you're looking at it you're looking at the Rings and on the other side of
+Saturn is the Sun ok
+and so that spacecraft was launched in 1997 it is still out there today still
+taking this
+these kinds of images and producing that kind of data and I don't know if you can
+see it but there's a little . out to the upper left hand corner there in the ring
+they're a little colored spot there that's the earth
+okay in that image so it's amazing you know we launched in 1997
+I think it took a seven or eight years to get to Saturn and those are the kind
+of images were able to bring back with the technology we've got so that's the
+kind of that's what we can be seeing out there if we were out there today
+I mean that's the main point what are the challenges
+this is a little technical but i thought it's it's very important
+one of the things this this this curve shows is how little solar power there is
+out beyond Jupiter ok when you get the sad when you go beyond Jupiter where you
+basically have zero solar power
+so this is one of the problems that we have in going out past Mars you can see
+on Mars we've sent Rovers to Mars and their solar powered and we've managed to
+run around Mars and things like that
+and now we know we have another over there that's nuclear-powered but when
+you start getting out and start exploring space
+you just can't accomplish what you want to do with the current the current
+technology we have today
+so we've got a we've gotta use the technologies of God we got to keep
+pushing out one of the ways we did
+Cassini this Cassini spacecraft is we do it with radioisotopes and we have
+radioisotopes that the Q&A
+there's a radioactive decay process and when they decay
+they give off a lot of heat and that that little glowing red pellet there on
+the right there is a natural radioactive decay of an isotope because we
+concentrate the isotope and then we put it on a photo of thermoelectric device
+so we put it on a couple and then we generate we just basically generate
+attempt to get a temperature difference between deep space and that hot pellet
+and we generally generate a DC current from man and the rover in the middle of
+that picture there is the Curiosity rover and I don't know if you probably
+can't see it but on the back of that Rover is a is one of our are
+radioisotope power systems
+ok so it's sitting there producing power produces about a hundred 10 watts of
+power
+that's what how the rover is enabled to survive and it doesn't just provide
+power it awful provides heat because there's not enough heat out there as
+well
+so one of the ways we get at are one of the technologies that we use is
+radioisotope power system because this Rover is a lot more efficient a lot more
+effective and it can go day and night and all that
+where the solar powered Rovers couldn't do it so that that's one of the
+technologies that we were pushing out
+this chart shows some of the missions we've run
+I mentioned Cassini we have a Mars 2020 mission coming up in 20 viously 2020 the
+Curiosity rover and then some people i'm sure people have heard about the Voyager
+1 and voyager 2 spacecraft those are also radioisotope power system missions
+and they're still out there they're just starting to go through the heliosphere
+and sending back data to us so this is just gives you an idea of the kinds of
+missions were able to do and how many we've done over the years we've just
+done so many end up
+we used radioisotopes on Apollo as well
+they carried him out on Apollo and those missions are reflected here and we use
+them for orbit fly by roving and landing so we use them in all kinds of different
+we provide all kinds of different capabilities this is a picture of the
+rover again of the Curiosity rover
+like I said it's a it's about a hundred 10 watts of power and a constant power
+but look at the efficiency for thermal electrics it's only about six percent
+efficient so that's just I mean the amount of kilowatts per kilogram is just
+very low it's about two kilowatts per kilogram for the <time> six </time> for
+this Rover
+so that's the current state of the art that we have here
+what I've been working on recently are some new concepts as Meredith said we've
+got a new device which is a Stirling engine it's a dynamic device and we can
+generate basically four times the power with the same amount of radioactive heat
+radioactive decay
+so it's much safer much everything's better that's much more efficient system
+and then finally you know your house your house that you live in you've got
+about 15 kilowatts in your house that's what you need in your house to live and
+you can see I'm building systems i'm sending systems out the deep space that
+are only a hundred or a hundred twenty watts or so I can't live on hard 20
+watts
+so I need to have larger systems so the only system if if we're going to go out
+beyond
+Jupiter and to explore the solar system
+we've got to come up with with higher power systems and the only system we've
+been able to come up with that can provide that kind of power density is a
+reactor systems basically nuclear reactor systems but up to this point I'm
+there's a lot of political and all kinds of other challenges associated and
+safety challenges associated with flying a reactor so we haven't actually
+demonstrated that cap capability at all so right now we're limited to doing
+things between here and the moon and here in Mars and fairly low power
+you know a hundred couple hundred watts that kind of thing those kinds of
+missions so so that's that's one of the challenges and that's why we're working
+on these dynamic systems the other the other big challenge we have is just
+radiation in space there's a field of radiation out there
+high energy I on electrons all kinds of charged particles and they're just
+everywhere and this is showing the magnetics protection that the earth
+provides to these particles so we're sitting here on earth and we have this
+protection system around us and the particles can't get to us because and
+and then what were effectively shielded from that
+so the problem is when we go out into deep space these particles are
+everywhere and there's a tremendous number of them and and we have the
+effect our electronics and they affect us
+so the one of the biggest problems we have is what's the effect on us as we
+travel deep space and how do we protect ourselves
+so I wanted to put this in when the Mars Science Laboratory travel to Mars last
+year and landed last year that the the last couple of last couple of bars on
+this chart are our radiation dose
+ok they measured radiant radiation dose on the way to Mars and it took them
+about six months and then there's a another the red bar on there is the 500
+days on mars
+so if you take the the bars that show
+if you takes you six months to get the Mars and you spend 500 days on mars and
+then you spend a hundred and hundred eighty more days coming back if you add
+up just those last two bars on that curve
+I know that on that and that curve there you end up with a dose that is deadly to
+you know that's not that's not healthy for humans i would say deadly but they
+had not good news because you can sit
+you can see the comparisons here for the other things or the space station things
+like that so we need to solve that problem we need to solve
+how we protect ourselves if we're going to do these missions to Mars and other
+places in deep space and we do not have the answer for this
+this is one of the things we just don't have the answer and we also haven't
+demonstrated the power capability that we need out there to live and survive in
+deep space they have the habitation because like I said you need 15 to 30
+kilowatts
+that's why the station has a hundred kilowatts on it because you use about 25
+all the time
+and if you're sitting on the station you you want to have that backup
+I mean you don't you want another 25 and another 25 and another 25 because you
+know that you just saw they had the pump problem on station and they lost some
+some of their cooling on half of the station
+so you you want to have that other half of the station still running and you
+know and then your cooling it so that you have that redundancy so you need
+that kind of you need the same kind of thing that we have on the station out in
+deep space
+so what I wanted to leave you with is we need to figure out this how we're going
+to accomplish these deep-space missions as a as a nation as NASA and as a nation
+and you folks out there it's not going to be in my generation
+it's not going to happen from what i see so
+the way to solve the radiation problem is we need shorter exposure time
+really and we need and we need shielding
+ok now there are ways to get shorter exposure time which is you travel faster
+but how do you travel faster and we're having you know if there's a you can use
+chemical but then how do you replenish when you get out there and so forth so
+it's very difficult to do so new that there's nuclear thermal and then there's
+ion engines and things like that but it turns out from what we've looked at the
+ion engines just don't try to provide the kind of impulse we need to get out
+there in a hurry because we'd like to shorten the time to come to mars - 30
+days or so like six times faster and we don't know how we don't have the systems
+in place to do that today
+so we the main thing we need to do is we need to demonstrate something that gives
+us that capability as we move forward here
+that's that that's the dream that we just keep moving forward and keep
+pushing out
+so how do we do that and right now there
+there's nothing on the books that says here this is what we're going to do this
+is how we're going to get there so the other thing the radiation challenge is
+such a big challenge for us we don't know what to do with it
+we have a website that's been set up and it's the NASA exploration design
+challenge for radiation and they're asking all of you at this website asking
+all of you to participate and it it goes to K through 12 k through 12
+college students whoever's out there NASA and and we're all looking for ideas
+for how we solve that problem for deep space exploration
+how do we protect ourselves how do we shield ourselves what are the mechanisms
+where the new ideas that could come our way where we could do that
+so we need that data we need that information from whoever's got it
+and you have any new ideas people have and then we're going to go ahead and
+well
+it won't be me but the we'll go ahead and implement those ideas in the future
+so that's what i want to leave you with is we have major challenges to keep our
+dream alive of exploring deep space and radiation and power we need to come up
+with some demonstrations and do those demonstrations in the next couple of
+decades so that we can keep pursuing our dreams on in the deep space that's all
+ok
