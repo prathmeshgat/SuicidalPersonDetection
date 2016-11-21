@@ -67,6 +67,8 @@ class BagOfWords:
         # create English stop words list
         en_stop = get_stop_words('en')
         # en_stop.append('like')
+        en_stop.append('video')
+        en_stop.append('videos')
         en_stop.append('hesitation')
         # en_stop.append('know')
         # en_stop.append('just')
@@ -97,10 +99,10 @@ class BagOfWords:
             stopped_tokens = [item for item in tokens if not item in en_stop]
 
             # stem tokens
-            # stemmed_tokens = [p_stemmer.stem(item) for item in stopped_tokens]
+            stemmed_tokens = [p_stemmer.stem(item) for item in stopped_tokens]
 
             # remove stop words from stemmed tokens
-            # stopped_tokens = [item for item in stemmed_tokens if not item in en_stop]
+            stopped_tokens = [item for item in stemmed_tokens if not item in en_stop]
 
             #remove tokens containing ''' & '%'
             cleaned_tokens = [item for item in stopped_tokens if ((item.find('\'') == -1) and item.find('%') == -1) and len(item)>2]
@@ -153,7 +155,7 @@ class BagOfWords:
         for item in sorted_dict:
             for item1 in dictionary.token2id.items():
                 if item[0] == item1[1]:
-                    wordFrequencyDict[item1[0]] = item[1]
+                    wordFrequencyDict[item1[0].lower()] = item[1]
 
         # print("Suicidal::\n"+str(topTenWords))
         return wordFrequencyDict

@@ -89,12 +89,14 @@ def topicModellingPNDocs():
     for item in res:
         docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(docSet,5,3,10,"PNDocs.html")
+    topicsModel = TM.TopicModelling(docSet,10,7,10,"PNDocs.html")
     print("No of documents::"+ str(len(docSet)))
     topics =topicsModel.getTopics()
     for item in topics:
         print("\n")
         print(item)
+
+    topicsModel.lda_apply_with_propensity()
 
 def frequentWordsPNDocs():
     container = Utils.Container()
@@ -122,7 +124,7 @@ def topicModellingSuicidalDocs():
     for item in res:
         docSet.append(item.transcript)
 
-    topicsModel = TM.TopicModelling(docSet,5,3,10,"SuicidalDocs.html")
+    topicsModel = TM.TopicModelling(docSet,10,7,10,"SuicidalDocs.html")
     print("No of documents::"+ str(len(docSet)))
     topics =topicsModel.getTopics()
     for item in topics:
@@ -160,8 +162,7 @@ def tagCloudSuicidalDocs():
 def CreateDB():
     container = Utils.Container()
     container.SuicidalDocumentRepo.cleanCollection()
-
-    for fileCount in range(1, 100):
+    for fileCount in range(1, 101):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Suicidal/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
             data = fp.read()
@@ -191,10 +192,11 @@ def CreateDB():
                               sentiments["neu"],
                               sentiments["compound"])
 
-            print(container.SuicidalDocumentRepo.insert(Doc))
+            container.SuicidalDocumentRepo.insert(Doc)
+            print(fileCount)
 
     container.PersonalNarrationDocumentRepo.cleanCollection()
-    for fileCount in range(1, 100):
+    for fileCount in range(1, 101):
             TEXT_FILE = path.join(os.pardir, "Resources/TextFiles/Personal-Narration/"+str(fileCount)+".txt")
             fp = open(TEXT_FILE, "r")
             data = fp.read()
@@ -224,7 +226,8 @@ def CreateDB():
                               sentiments["neu"],
                               sentiments["compound"])
 
-            print(container.PersonalNarrationDocumentRepo.insert(Doc))
+            container.PersonalNarrationDocumentRepo.insert(Doc)
+            print(fileCount)
 
 def CreateCommentsDB():
     container = Utils.Container()
@@ -529,18 +532,16 @@ def createwordChartCSV():
     pp = pprint.PrettyPrinter(indent=4)
     container = Utils.Container()
     res = container.WordStatisticsRepo.getAll()
-    count =0
     for item in res:
         # print("\n")
         # pp.pprint(item.__dict__)
         if(item.difference!=0):
-            count = count +1
-
+            difference = item.difference
             if(item.suicidalCorpusCount>item.personalNarrationCorpusCount):
                 side = "right"
                 arrow = "up"
                 value = abs(item.pctHappinessShiftSui)
-                if(item.pctHappinessShiftSui>0):
+                if(item.pctHappinessShiftSui>=0):
                     color = "yellow"
                 else:
                     color= "blue"
@@ -549,7 +550,7 @@ def createwordChartCSV():
                 arrow ="down"
                 value = -(abs(item.pctHappinessShiftPN))
 
-                if(item.pctHappinessShiftPN>0):
+                if(item.pctHappinessShiftPN>=0):
                     color = "yellow"
                 else:
                     color= "blue"
@@ -560,17 +561,27 @@ def createwordChartCSV():
                  'value':value,
                  'arrowDirection':arrow,
                  'color':color,
-                 'side':side
+                 'side':side,
+                 'difference':difference
                  })
-            if(count==50):
-                break
 
-    print("Count::"+str(count))
-    graphList = sorted(graphList, key=lambda k: abs(k['value']))
+    graphList = sorted(graphList, key=lambda k: abs(k['difference']),reverse = True)
+
+    finalList = list()
+    count = 1
     for item in graphList:
+        finalList.append(item)
+        count = count +1
+        if(count ==51):
+            break;
+
+    finalList = sorted(finalList, key=lambda k: abs(k['value']))
+
+    for item in finalList:
         print("\n")
         pp.pprint(item)
         writer.writerow({'Word': item['word'], 'Value': item['value']})
+        count = count +1
 
 def createfeatureSetML():
     container = Utils.Container()
@@ -676,15 +687,15 @@ topicModellingSuicidalDocs()
 
 # pp = pprint.PrettyPrinter(indent=4)
 # container = Utils.Container()
-# res = container.HappinessScoreRepo.getAll()
+# res = container.WordStatisticsRepo.getAll()
 # count =0
 # for item in res:
 #     # print("\n")
-#     if(item.word == "without"):
-#         count = count +1
+#     # if(item.word == "without"):
+#     #     count = count +1
 #     pp.pprint(item.__dict__)
 #     # count = count +1
-# print("Count::"+str(count))
+# # print("Count::"+str(count))
 
 
 
